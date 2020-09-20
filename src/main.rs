@@ -1,5 +1,5 @@
 fn main() {
-    println!("=== 30 Seconds of Rust ===");
+    println!("\n=== 30 Seconds of Rust ===\n");
     println!("hex_to_rgb: FFA501 to {:?}", hex_to_rgb("FFA501"));
     println!("rgb_to_hex: [255, 165, 1] to {}", rgb_to_hex(255, 165, 1));
 }
