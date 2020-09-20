@@ -1,6 +1,7 @@
 fn main() {
     println!("=== 30 Seconds of Rust ===");
     println!("hex_to_rgb: FFA501 to {:?}", hex_to_rgb("FFA501"));
+    println!("rgb_to_hex: [255, 165, 1] to {}", rgb_to_hex(255, 165, 1));
 }
 
 /// convert HEX into RGB value
@@ -21,6 +22,19 @@ fn hex_to_rgb(hex: &str) -> Vec<i64> {
         .collect::<Vec<_>>()
 }
 
+/// convert RGB into HEX value
+///
+/// # Examples
+///
+/// Basic usage:
+///
+/// ```
+/// assert_eq!("FFA501", rgb_to_hex(255, 165, 1));
+/// ```
+fn rgb_to_hex(r: i32, g: i32, b: i32) -> String {
+    format!("{:02X}{:02X}{:02X}", r, g, b)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -28,5 +42,9 @@ mod tests {
     #[test]
     fn test_hex_to_rgb() {
         assert_eq!(vec![255, 165, 1], hex_to_rgb(&"FFA501"));
+    }
+    #[test]
+    fn test_rgb_to_hex() {
+        assert_eq!("FFA501", rgb_to_hex(255, 165, 1));
     }
 }
