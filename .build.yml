@@ -1,0 +1,19 @@
+image: alpine/3.12
+
+packages:
+  - rust
+  - cargo
+
+sources:
+  - git@git.sr.ht:~azzamsa/thirtyseconds.rs
+
+secrets:
+  - f83522b9-1169-4d6a-8456-302240e5440a
+
+tasks:
+  - setup: |
+      cd thirtyseconds.rs
+      cargo check
+  - test: |
+      cd thirtyseconds.rs
+      cargo test
