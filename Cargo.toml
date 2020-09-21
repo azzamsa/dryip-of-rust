@@ -2,7 +2,13 @@
 name = "thirtyseconds"
 version = "0.1.0"
 authors = ["azzamsa <me@azzamsa.com>"]
+exclude = ["tests/**/*", "*.md"]
 edition = "2018"
+
+[[bin]]
+name = "thirtyseconds"
+path = "src/main.rs"
+doctest = true
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
