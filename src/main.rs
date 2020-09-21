@@ -2,6 +2,7 @@ fn main() {
     println!("\n=== 30 Seconds of Rust ===\n");
     println!("hex_to_rgb: FFA501 to {:?}", hex_to_rgb("FFA501"));
     println!("rgb_to_hex: [255, 165, 1] to {}", rgb_to_hex(255, 165, 1));
+    println!("all_equal: [2, 2, 2] is {}", all_equal(vec![2, 2, 2]));
 }
 
 /// convert HEX into RGB value
@@ -35,6 +36,10 @@ fn rgb_to_hex(r: i32, g: i32, b: i32) -> String {
     format!("{:02X}{:02X}{:02X}", r, g, b)
 }
 
+fn all_equal(lst: Vec<u32>) -> bool {
+    // FIX why the python version use lst[1:] == lst[:-1]?
+    &lst[..] == &lst[..]
+}
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -46,5 +51,9 @@ mod tests {
     #[test]
     fn test_rgb_to_hex() {
         assert_eq!("FFA501", rgb_to_hex(255, 165, 1));
+    }
+    #[test]
+    fn test_all_equal() {
+        assert_eq!(true, all_equal(vec![2, 2, 2]));
     }
 }
