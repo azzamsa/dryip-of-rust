@@ -52,10 +52,10 @@ pub fn all_equal(lst: Vec<u32>) -> bool {
 /// Basic usage:
 ///
 /// ```
-/// assert_eq!(true, thirtyseconds::all_equal(vec![1, 2, 3]));
+/// assert_eq!(true, thirtyseconds::all_unique(vec![1, 2, 3]));
 /// ```
 pub fn all_unique(lst: Vec<u32>) -> bool {
-    lst.len() == lst.into_iter().collect::<HashSet<u32>>().len()
+    &lst.len() == &lst.into_iter().collect::<HashSet<u32>>().len()
 }
 
 #[cfg(test)]
