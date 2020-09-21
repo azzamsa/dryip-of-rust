@@ -42,7 +42,7 @@ pub fn rgb_to_hex(r: i32, g: i32, b: i32) -> String {
 /// ```
 pub fn all_equal(lst: Vec<u32>) -> bool {
     // don't compare the list as is. only part of it.
-    &lst[1..] == &lst[..lst.len()-1]
+    &lst[1..] == &lst[..lst.len() - 1]
 }
 
 /// check if all value in given list are unique
@@ -56,6 +56,20 @@ pub fn all_equal(lst: Vec<u32>) -> bool {
 /// ```
 pub fn all_unique(lst: Vec<u32>) -> bool {
     &lst.len() == &lst.into_iter().collect::<HashSet<u32>>().len()
+}
+
+/// Returns a list of numbers in the arithmetic progression starting with the
+/// given positive integer and up to the specified limit.
+///
+/// # Examples
+///
+/// Basic usage:
+///
+/// ```
+/// assert_eq!(vec![5, 10, 15, 20, 25], thirtyseconds::find_multiples(5, 25));
+/// ```
+pub fn find_multiples(n: i32, lim: i32) -> Vec<i32> {
+    (n..lim + 1).step_by(n as usize).collect::<Vec<i32>>()
 }
 
 #[cfg(test)]
@@ -81,5 +95,10 @@ mod tests {
     fn test_all_unique() {
         assert_eq!(true, all_unique(vec![1, 2, 3]));
         assert_eq!(false, all_unique(vec![1, 1, 3]));
+    }
+    #[test]
+    fn test_find_multiples() {
+        assert_eq!(vec![5, 10, 15, 20, 25], find_multiples(5, 25));
+        assert_eq!(vec![2, 4, 6, 8, 10], find_multiples(2, 10));
     }
 }
