@@ -13,4 +13,5 @@ fn main() {
         lib::all_unique(vec![1, 2, 3])
     );
     println!("find_multiple: (5, 25) is {:?}", lib::find_multiples(5, 25));
+    println!("average: [1, 2, 3] is {:?}", lib::average(vec![1, 2, 3]))
 }

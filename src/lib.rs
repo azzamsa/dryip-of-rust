@@ -72,6 +72,18 @@ pub fn find_multiples(n: i32, lim: i32) -> Vec<i32> {
     (n..lim + 1).step_by(n as usize).collect::<Vec<i32>>()
 }
 
+/// calculate the average of two or more numbers.
+///
+/// # Examples
+///
+/// Basic usage:
+///
+/// ```
+/// assert_eq!(2.0, thirtyseconds::average(vec![1, 2, 3]));
+/// ```
+pub fn average(nums: Vec<u32>) -> f32 {
+    (nums.iter().sum::<u32>() / nums.len() as u32) as f32
+}
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -100,5 +112,10 @@ mod tests {
     fn test_find_multiples() {
         assert_eq!(vec![5, 10, 15, 20, 25], find_multiples(5, 25));
         assert_eq!(vec![2, 4, 6, 8, 10], find_multiples(2, 10));
+    }
+    #[test]
+    fn test_average() {
+        assert_eq!(2.0, average(vec![1, 2, 3]));
+        assert_eq!(4.0, average(vec![2, 4, 8]));
     }
 }
