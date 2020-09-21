@@ -65,17 +65,21 @@ mod tests {
     #[test]
     fn test_hex_to_rgb() {
         assert_eq!(vec![255, 165, 1], hex_to_rgb(&"FFA501"));
+        assert_eq!(vec![192, 192, 192], hex_to_rgb(&"C0C0C0"));
     }
     #[test]
     fn test_rgb_to_hex() {
         assert_eq!("FFA501", rgb_to_hex(255, 165, 1));
+        assert_eq!(hex_to_rgb(&"C0C0C0"), vec![192, 192, 192]);
     }
     #[test]
     fn test_all_equal() {
         assert_eq!(true, all_equal(vec![2, 2, 2]));
+        assert_eq!(true, all_equal(vec![2, 3, 2]));
     }
     #[test]
     fn test_all_unique() {
         assert_eq!(true, all_unique(vec![1, 2, 3]));
+        assert_eq!(false, all_unique(vec![1, 1, 3]));
     }
 }
