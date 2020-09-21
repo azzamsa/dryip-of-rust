@@ -36,6 +36,15 @@ fn rgb_to_hex(r: i32, g: i32, b: i32) -> String {
     format!("{:02X}{:02X}{:02X}", r, g, b)
 }
 
+/// check if all value in given list are equal
+///
+/// # Examples
+///
+/// Basic usage:
+///
+/// ```
+/// assert_eq!(true, all_equal(vec![2, 2, 2]));a
+/// ```
 fn all_equal(lst: Vec<u32>) -> bool {
     // FIX why the python version use lst[1:] == lst[:-1]?
     &lst[..] == &lst[..]
