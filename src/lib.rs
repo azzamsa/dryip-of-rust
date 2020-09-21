@@ -1,3 +1,5 @@
+use std::collections::HashSet;
+
 /// convert HEX into RGB value
 ///
 /// # Examples
@@ -42,6 +44,20 @@ pub fn all_equal(lst: Vec<u32>) -> bool {
     // FIX why the python version use lst[1:] == lst[:-1]?
     &lst[..] == &lst[..]
 }
+
+/// check if all value in given list are unique
+///
+/// # Examples
+///
+/// Basic usage:
+///
+/// ```
+/// assert_eq!(true, thirtyseconds::all_equal(vec![1, 2, 3]));
+/// ```
+pub fn all_unique(lst: Vec<u32>) -> bool {
+    lst.len() == lst.into_iter().collect::<HashSet<u32>>().len()
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -57,5 +73,9 @@ mod tests {
     #[test]
     fn test_all_equal() {
         assert_eq!(true, all_equal(vec![2, 2, 2]));
+    }
+    #[test]
+    fn test_all_unique() {
+        assert_eq!(true, all_unique(vec![1, 2, 3]));
     }
 }
