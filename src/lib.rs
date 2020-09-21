@@ -41,8 +41,8 @@ pub fn rgb_to_hex(r: i32, g: i32, b: i32) -> String {
 /// assert_eq!(true, thirtyseconds::all_equal(vec![2, 2, 2]));
 /// ```
 pub fn all_equal(lst: Vec<u32>) -> bool {
-    // FIX why the python version use lst[1:] == lst[:-1]?
-    &lst[..] == &lst[..]
+    // don't compare the list as is. only part of it.
+    &lst[1..] == &lst[..lst.len()-1]
 }
 
 /// check if all value in given list are unique
@@ -75,7 +75,7 @@ mod tests {
     #[test]
     fn test_all_equal() {
         assert_eq!(true, all_equal(vec![2, 2, 2]));
-        assert_eq!(true, all_equal(vec![2, 3, 2]));
+        assert_eq!(false, all_equal(vec![2, 3, 2]));
     }
     #[test]
     fn test_all_unique() {
