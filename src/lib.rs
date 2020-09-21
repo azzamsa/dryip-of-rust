@@ -1,6 +1,6 @@
 use std::collections::HashSet;
 
-/// convert HEX into RGB value
+/// Convert HEX into RGB value.
 ///
 /// # Examples
 ///
@@ -18,7 +18,7 @@ pub fn hex_to_rgb(hex: &str) -> Vec<i64> {
         .collect::<Vec<_>>()
 }
 
-/// convert RGB into HEX value
+/// Convert RGB into HEX value.
 ///
 /// # Examples
 ///
@@ -31,7 +31,7 @@ pub fn rgb_to_hex(r: i32, g: i32, b: i32) -> String {
     format!("{:02X}{:02X}{:02X}", r, g, b)
 }
 
-/// check if all value in given list are equal
+/// Check if all value in given list are equal.
 ///
 /// # Examples
 ///
@@ -45,7 +45,7 @@ pub fn all_equal(lst: Vec<u32>) -> bool {
     &lst[1..] == &lst[..lst.len() - 1]
 }
 
-/// check if all value in given list are unique
+/// Check if all value in given list are unique.
 ///
 /// # Examples
 ///
@@ -72,7 +72,7 @@ pub fn find_multiples(n: i32, lim: i32) -> Vec<i32> {
     (n..lim + 1).step_by(n as usize).collect::<Vec<i32>>()
 }
 
-/// calculate the average of two or more numbers.
+/// Calculate the average of two or more numbers.
 ///
 /// # Examples
 ///
