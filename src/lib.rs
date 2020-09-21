@@ -84,6 +84,32 @@ pub fn find_multiples(n: i32, lim: i32) -> Vec<i32> {
 pub fn average(nums: Vec<u32>) -> f32 {
     (nums.iter().sum::<u32>() / nums.len() as u32) as f32
 }
+
+/// Capitalize every word.
+///
+/// For complex operation use https://github.com/wezm/titlecase
+/// # Examples
+///
+/// Basic usage:
+///
+/// ``
+/// assert_eq!("Foo Bar".to_string(), thirtyseconds::capitalize_every_word("foo bar".to_string()));
+/// ```
+pub fn capitalize_every_word(sentence: String) -> String {
+    let words: Vec<&str> = sentence.split(' ').collect();
+    let mut result: Vec<String> = Vec::new();
+
+    for word in &words {
+        result.push(format!(
+            "{}{}",
+            word.chars().nth(0).unwrap().to_uppercase().to_string(),
+            &word[1..]
+        ));
+    }
+
+    result.join(" ")
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -117,5 +143,17 @@ mod tests {
     fn test_average() {
         assert_eq!(2.0, average(vec![1, 2, 3]));
         assert_eq!(4.0, average(vec![2, 4, 8]));
+    }
+    #[test]
+    fn test_capitalize_every_word() {
+        assert_eq!(
+            "Hello World!".to_string(),
+            capitalize_every_word("hello world!".to_string())
+        );
+        assert_eq!(
+            "The Quick Brown Fox Jumps".to_string(),
+            capitalize_every_word("The quick brown fox jumps".to_string())
+        );
+        assert_eq!("Foo".to_string(), capitalize_every_word("foo".to_string()));
     }
 }
