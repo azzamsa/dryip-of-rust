@@ -1,0 +1,4 @@
+var searchIndex = JSON.parse('{\
+"thirtyseconds":{"doc":"","t":[5,5,5,5,5,5,5],"n":["all_equal","all_unique","average","capitalize_every_word","find_multiples","hex_to_rgb","rgb_to_hex"],"q":["thirtyseconds","","","","","",""],"d":["Check if all value in given list are equal.","Check if all value in given list are unique.","Calculate the average of two or more numbers.","Capitalize every word.","Returns a list of numbers in the arithmetic progression …","Convert HEX into RGB value.","Convert RGB into HEX value."],"i":[0,0,0,0,0,0,0],"f":[[[["u32",15],["vec",3,["u32"]]],["bool",15]],[[["u32",15],["vec",3,["u32"]]],["bool",15]],[[["u32",15],["vec",3,["u32"]]],["f32",15]],[[["string",3]],["string",3]],[[["i32",15]],[["vec",3,["i32"]],["i32",15]]],[[["str",15]],[["vec",3,["i64"]],["i64",15]]],[[["i32",15]],["string",3]]],"p":[]}\
+}');
+if (window.initSearch) {window.initSearch(searchIndex)};
