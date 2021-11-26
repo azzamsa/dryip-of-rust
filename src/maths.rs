@@ -1,12 +1,13 @@
 /// Calculate the average of two or more numbers.
 ///
+/// Use `sum()` to sum all of the args provided, divide by `args.len()`.
+///
 /// # Examples
 ///
 /// Basic usage:
 ///
-/// ```
-/// use thirtyseconds::maths::average;
-///
+/// ```rust
+/// # use thirtyseconds::maths::average;
 /// assert_eq!(2.0, average(vec![1, 2, 3]));
 /// ```
 pub fn average(nums: Vec<u32>) -> f32 {

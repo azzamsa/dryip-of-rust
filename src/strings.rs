@@ -1,17 +1,20 @@
 /// Convert HEX into RGB value.
 ///
+/// - Convert string slice to integer using [from_str_radix].
+/// - Iterate through fixed index for the hex input.
+/// - Put the result into a vector.
+///
 /// # Examples
 ///
 /// Basic usage:
 ///
-/// ```
-/// use thirtyseconds::strings::hex_to_rgb;
-///
+/// ```rust
+/// # use thirtyseconds::strings::hex_to_rgb;
 /// assert_eq!(vec![255, 165, 1], hex_to_rgb("FFA501"));
 /// ```
+/// [from_str_radix]: https://doc.rust-lang.org/std/primitive.i64.html#method.from_str_radix
 pub fn hex_to_rgb(hex: &str) -> Vec<i64> {
     let to_base16 = |x| i64::from_str_radix(x, 16);
-    // NOTE can we use tuple as return type
     [0, 2, 4]
         .iter()
         .map(|&x| to_base16(&hex[x..x + 2]).unwrap())
@@ -20,30 +23,36 @@ pub fn hex_to_rgb(hex: &str) -> Vec<i64> {
 
 /// Convert RGB into HEX value.
 ///
+/// Use [UpperHex] to format the string.
+///
 /// # Examples
 ///
 /// Basic usage:
 ///
-/// ```
-/// use thirtyseconds::strings::rgb_to_hex;
-///
+/// ```rust
+/// # use thirtyseconds::strings::rgb_to_hex;
 /// assert_eq!("FFA501", rgb_to_hex(255, 165, 1));
 /// ```
+/// [UpperHex]: https://doc.rust-lang.org/std/fmt/trait.UpperHex.html
 pub fn rgb_to_hex(r: i32, g: i32, b: i32) -> String {
     format!("{:02X}{:02X}{:02X}", r, g, b)
 }
 
 /// Capitalize every word.
 ///
+/// - Split the sentence by whitespace using `split()`.
+/// - Iterate through each word using `map()`.
+/// - Use [RangeFull] notation to get the first char uppercased and left the rest as is.
+///
 /// # Examples
 ///
 /// Basic usage:
 ///
-/// ```
-/// use thirtyseconds::strings::capitalize_every_word;
-///
+/// ```rust
+/// # use thirtyseconds::strings::capitalize_every_word;
 /// assert_eq!("Foo Bar".to_string(), capitalize_every_word("foo bar".to_string()));
 /// ```
+/// [RangeFull]: https://doc.rust-lang.org/std/ops/struct.RangeFull.html
 pub fn capitalize_every_word(sentence: String) -> String {
     sentence
         .split(' ')
@@ -54,15 +63,19 @@ pub fn capitalize_every_word(sentence: String) -> String {
 
 /// Converts a string to camelcase.
 ///
+/// - Replace any - or _ with a space, using the `replace()`.
+/// - Use `enumerate()` to check for the first word.
+/// - Use [RangeFull] notation to get the first char uppercased and left the rest as is.
+///
 /// # Examples
 ///
 /// Basic usage:
 ///
-/// ```
-/// use thirtyseconds::strings::to_camelcase;
-///
+/// ```rust
+/// # use thirtyseconds::strings::to_camelcase;
 /// assert_eq!("fooBar".to_string(), to_camelcase("foo bar".to_string()));
 /// ```
+/// [RangeFull]: https://doc.rust-lang.org/std/ops/struct.RangeFull.html
 pub fn to_camelcase(sentence: String) -> String {
     sentence
         .replace("-", " ")
