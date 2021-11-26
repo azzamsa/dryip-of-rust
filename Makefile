@@ -9,6 +9,7 @@ verify: ## Run all the repository requirement before making a commit
 	cargo fmt
 	cargo clippy
 	cargo test
+	cargo tarpaulin --ignore-tests
 
 is_verified:  ## Check if the repository complies with the requirement in CI.
 	cargo fmt -- --check
