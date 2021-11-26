@@ -122,13 +122,13 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_all_equal</span>() {
-        <span class="macro">assert!</span>(<span class="ident">all_equal</span>(<span class="macro">vec!</span>[<span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>]));
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">all_equal</span>(<span class="macro">vec!</span>[<span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>]));
+        <span class="macro">assert!</span>(<span class="ident">all_equal</span>(<span class="macro">vec!</span>[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>]));
+        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">all_equal</span>(<span class="macro">vec!</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]));
     }
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_all_unique</span>() {
-        <span class="macro">assert!</span>(<span class="ident">all_unique</span>(<span class="macro">vec!</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]));
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">all_unique</span>(<span class="macro">vec!</span>[<span class="number">1</span>, <span class="number">1</span>, <span class="number">3</span>]));
+        <span class="macro">assert!</span>(<span class="ident">all_unique</span>(<span class="macro">vec!</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]));
+        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">all_unique</span>(<span class="macro">vec!</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]));
     }
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_find_multiples</span>() {
