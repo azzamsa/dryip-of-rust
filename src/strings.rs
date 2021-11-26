@@ -59,6 +59,37 @@ pub fn capitalize_every_word(sentence: String) -> String {
     result.join(" ")
 }
 
+/// Converts a string to camelcase.
+///
+/// # Examples
+///
+/// Basic usage:
+///
+/// ```
+/// use thirtyseconds::strings::to_camelcase;
+///
+/// assert_eq!("fooBar".to_string(), to_camelcase("foo bar".to_string()));
+/// ```
+pub fn to_camelcase(sentence: String) -> String {
+    sentence
+        .replace("-", " ")
+        .replace("_", " ")
+        .split(' ')
+        .enumerate()
+        .map(|(index, word)| {
+            if index == 0 {
+                word.to_lowercase()
+            } else {
+                format!(
+                    "{}{}",
+                    word.chars().next().unwrap().to_uppercase(),
+                    &word[1..]
+                )
+            }
+        })
+        .collect()
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -84,5 +115,25 @@ mod tests {
             capitalize_every_word("The quick brown fox jumps".to_string())
         );
         assert_eq!("Foo".to_string(), capitalize_every_word("foo".to_string()));
+    }
+    #[test]
+    fn test_to_camelcase() {
+        assert_eq!("fooBar".to_string(), to_camelcase("foo bar".to_string()));
+        assert_eq!(
+            "someDatabaseFieldName".to_string(),
+            to_camelcase("some_database_field_name".to_string())
+        );
+        assert_eq!(
+            "someLabelThatNeedsToBeCamelized".to_string(),
+            to_camelcase("Some label that needs to be camelized".to_string())
+        );
+        assert_eq!(
+            "someFooProperty".to_string(),
+            to_camelcase("some-foo-property".to_string())
+        );
+        assert_eq!(
+            "someMixedStringWithSpacesUnderscoresAndHyphens".to_string(),
+            to_camelcase("some-mixed_string with spaces_underscores-and-hyphens".to_string())
+        )
     }
 }
