@@ -53,13 +53,13 @@ mod tests {
 
     #[test]
     fn test_all_equal() {
-        assert!(all_equal(vec![2, 2, 2]));
-        assert!(!all_equal(vec![2, 3, 2]));
+        assert!(all_equal(vec![1, 1, 1, 1]));
+        assert!(!all_equal(vec![1, 2, 3, 4, 5, 6]));
     }
     #[test]
     fn test_all_unique() {
-        assert!(all_unique(vec![1, 2, 3]));
-        assert!(!all_unique(vec![1, 1, 3]));
+        assert!(all_unique(vec![1, 2, 3, 4, 5, 6]));
+        assert!(!all_unique(vec![1, 2, 2, 3, 4, 5]));
     }
     #[test]
     fn test_find_multiples() {
