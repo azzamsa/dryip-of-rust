@@ -14,7 +14,7 @@ pub mod arrays;
 pub mod maths;
 pub mod strings;
 
-pub fn sorted(word: String) -> String {
+pub fn sorted(word: &str) -> String {
     let mut chars_ = word.chars().collect::<Vec<char>>();
     // TODO rust currently doesn't have non-mutating sort function
     // https://github.com/rust-lang/rfcs/issues/2731
@@ -31,7 +31,7 @@ mod tests {
 
     #[test]
     fn test_sorted() {
-        assert_eq!("aaagmnr".to_string(), sorted("anagram".to_string()));
-        assert_eq!("aceimn".to_string(), sorted("iceman".to_string()));
+        assert_eq!("aaagmnr", sorted("anagram"));
+        assert_eq!("aceimn", sorted("iceman"));
     }
 }

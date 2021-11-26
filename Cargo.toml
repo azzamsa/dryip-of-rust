@@ -10,6 +10,9 @@ readme = "README.md"
 license = "CC-BY-4.0"
 repository = "https://github.com/azzamsa/30-seconds-of-rust"
 
+[dev-dependencies]
+proptest = "1.0.0"
+
 [dev-dependencies.cargo-husky]
 version = "1"
 default-features = false

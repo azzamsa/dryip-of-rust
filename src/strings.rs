@@ -50,10 +50,10 @@ pub fn rgb_to_hex(r: i32, g: i32, b: i32) -> String {
 ///
 /// ```rust
 /// # use thirtyseconds::strings::capitalize_every_word;
-/// assert_eq!("Foo Bar".to_string(), capitalize_every_word("foo bar".to_string()));
+/// assert_eq!("Foo Bar", capitalize_every_word("foo bar"));
 /// ```
 /// [RangeFull]: https://doc.rust-lang.org/std/ops/struct.RangeFull.html
-pub fn capitalize_every_word(sentence: String) -> String {
+pub fn capitalize_every_word(sentence: &str) -> String {
     sentence
         .split(' ')
         .map(|word| format!("{}{}", &word[..1].to_uppercase(), &word[1..]))
@@ -73,10 +73,10 @@ pub fn capitalize_every_word(sentence: String) -> String {
 ///
 /// ```rust
 /// # use thirtyseconds::strings::to_camelcase;
-/// assert_eq!("fooBar".to_string(), to_camelcase("foo bar".to_string()));
+/// assert_eq!("fooBar", to_camelcase("foo bar"));
 /// ```
 /// [RangeFull]: https://doc.rust-lang.org/std/ops/struct.RangeFull.html
-pub fn to_camelcase(sentence: String) -> String {
+pub fn to_camelcase(sentence: &str) -> String {
     sentence
         .replace("-", " ")
         .replace("_", " ")
@@ -105,16 +105,16 @@ pub fn to_camelcase(sentence: String) -> String {
 ///
 /// ```rust
 /// # use thirtyseconds::strings::is_anagram;
-/// assert!(is_anagram("iceman".to_string(), "cinema".to_string()));
+/// assert!(is_anagram("iceman", "cinema"));
 /// ```
-pub fn is_anagram(sentence1: String, sentence2: String) -> bool {
+pub fn is_anagram(sentence1: &str, sentence2: &str) -> bool {
     let sentence1_ = sentence1.replace(" ", "").to_lowercase();
     let sentence2_ = sentence2.replace(" ", "").to_lowercase();
 
     if sentence1_.len() != sentence2_.len() {
         false
     } else {
-        crate::sorted(sentence1_) == crate::sorted(sentence2_)
+        crate::sorted(&sentence1_) == crate::sorted(&sentence2_)
     }
 }
 
@@ -134,40 +134,34 @@ mod tests {
     }
     #[test]
     fn test_capitalize_every_word() {
+        assert_eq!("Hello World!", capitalize_every_word("hello world!"));
         assert_eq!(
-            "Hello World!".to_string(),
-            capitalize_every_word("hello world!".to_string())
+            "The Quick Brown Fox Jumps",
+            capitalize_every_word("The quick brown fox jumps")
         );
-        assert_eq!(
-            "The Quick Brown Fox Jumps".to_string(),
-            capitalize_every_word("The quick brown fox jumps".to_string())
-        );
-        assert_eq!("Foo".to_string(), capitalize_every_word("foo".to_string()));
+        assert_eq!("Foo", capitalize_every_word("foo"));
     }
     #[test]
     fn test_to_camelcase() {
-        assert_eq!("fooBar".to_string(), to_camelcase("foo bar".to_string()));
+        assert_eq!("fooBar", to_camelcase("foo bar"));
         assert_eq!(
-            "someDatabaseFieldName".to_string(),
-            to_camelcase("some_database_field_name".to_string())
+            "someDatabaseFieldName",
+            to_camelcase("some_database_field_name")
         );
         assert_eq!(
-            "someLabelThatNeedsToBeCamelized".to_string(),
-            to_camelcase("Some label that needs to be camelized".to_string())
+            "someLabelThatNeedsToBeCamelized",
+            to_camelcase("Some label that needs to be camelized")
         );
+        assert_eq!("someFooProperty", to_camelcase("some-foo-property"));
         assert_eq!(
-            "someFooProperty".to_string(),
-            to_camelcase("some-foo-property".to_string())
-        );
-        assert_eq!(
-            "someMixedStringWithSpacesUnderscoresAndHyphens".to_string(),
-            to_camelcase("some-mixed_string with spaces_underscores-and-hyphens".to_string())
+            "someMixedStringWithSpacesUnderscoresAndHyphens",
+            to_camelcase("some-mixed_string with spaces_underscores-and-hyphens")
         )
     }
     #[test]
     fn test_is_anagram() {
-        assert!(is_anagram("anagram".to_string(), "Nag a ram".to_string()));
-        assert!(is_anagram("iceman".to_string(), "cinema".to_string()));
-        assert!(!is_anagram("foo".to_string(), "of".to_string()));
+        assert!(is_anagram("anagram", "Nag a ram"));
+        assert!(is_anagram("iceman", "cinema"));
+        assert!(!is_anagram("foo", "of"));
     }
 }
