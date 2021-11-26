@@ -3,17 +3,17 @@ help:
 
 verify_light: ## Run most important repository requirement
 	cargo fmt
-	cargo clippy --locked --all-targets
+	cargo clippy
 
 verify: ## Run all the repository requirement before making a commit
 	cargo fmt
-	cargo clippy --locked --all-targets
-	cargo test --all-targets
+	cargo clippy
+	cargo test
 
 is_verified:  ## Check if the repository complies with the requirement in CI.
 	cargo fmt -- --check
-	cargo clippy  --locked --all-targets
-	cargo test --workspace --all-targets
+	cargo clippy
+	cargo test
 
 
 .PHONY: help verify_light verify  is_verified
