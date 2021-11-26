@@ -22,5 +22,5 @@ Short Rust 🦀 code snippets for inspiration.
 
 ## Credits
 
-- The code is ported from [30-seconds-of-code](https://github.com/30-seconds/30-seconds-of-code)
+- The code is ported from [30-seconds-of-code-js](https://github.com/30-seconds/30-seconds-of-code/tree/4cf744a38c45d09fe552f9b90d7485926097e91e/) and [30-seconds-of-python](https://github.com/30-seconds/30-seconds-of-python/tree/e6064b1236bbe64f0a7f4e1127223b75848b92e8/)
 - Ferris logo by [rustacean.net](https://rustacean.net/)
