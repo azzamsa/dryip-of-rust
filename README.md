@@ -12,7 +12,12 @@ Short Rust 🦀 code snippets for inspiration.
 
 ---
 
-Inspired by [30-seconds-of-code][30-seconds-of-code], this project is
-intended to show the capability of Rust for the similar snippet.
+## Usage
 
-[30-seconds-of-code]: https://github.com/30-seconds/30-seconds-of-code
+- Visit [the website](https://azzamsa.github.io/30-seconds-of-rust/) to view the snippets.
+- Click the `[SRC]` button at the top to see the complete source code.
+
+## Credits
+
+- The code is ported from [30-seconds-of-code](https://github.com/30-seconds/30-seconds-of-code)
+- Ferris logo by [rustacean.net](https://rustacean.net/)
