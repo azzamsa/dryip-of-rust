@@ -10,3 +10,25 @@
 pub mod arrays;
 pub mod maths;
 pub mod strings;
+
+pub fn sorted(word: String) -> String {
+    let mut chars_ = word.chars().collect::<Vec<char>>();
+    // TODO rust currently doesn't have non-mutating sort function
+    // https://github.com/rust-lang/rfcs/issues/2731
+    // there is a handy tool https://docs.rs/itertools/0.10.1/itertools/fn.sorted.html
+    // but currently, we avoid any external dependencies, as this project is only for
+    // learning purpose
+    chars_.sort_unstable();
+    chars_.iter().collect::<String>()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_sorted() {
+        assert_eq!("aaagmnr".to_string(), sorted("anagram".to_string()));
+        assert_eq!("aceimn".to_string(), sorted("iceman".to_string()));
+    }
+}

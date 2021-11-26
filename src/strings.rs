@@ -92,6 +92,32 @@ pub fn to_camelcase(sentence: String) -> String {
         .collect()
 }
 
+/// Checks if a string is an anagram of another string (case-insensitive, ignores spaces, punctuation and special characters).
+///
+/// - Remove any whitespace using `replace()`.
+/// - Lowercase all the string using `to_lowercase()`.
+/// - Compare the lengths of the both, return False if they are not equal.
+/// - If they have the same length, sort the string and compare.
+///
+/// # Examples
+///
+/// Basic usage:
+///
+/// ```rust
+/// # use thirtyseconds::strings::is_anagram;
+/// assert!(is_anagram("iceman".to_string(), "cinema".to_string()));
+/// ```
+pub fn is_anagram(sentence1: String, sentence2: String) -> bool {
+    let sentence1_ = sentence1.replace(" ", "").to_lowercase();
+    let sentence2_ = sentence2.replace(" ", "").to_lowercase();
+
+    if sentence1_.len() != sentence2_.len() {
+        false
+    } else {
+        crate::sorted(sentence1_) == crate::sorted(sentence2_)
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -137,5 +163,11 @@ mod tests {
             "someMixedStringWithSpacesUnderscoresAndHyphens".to_string(),
             to_camelcase("some-mixed_string with spaces_underscores-and-hyphens".to_string())
         )
+    }
+    #[test]
+    fn test_is_anagram() {
+        assert!(is_anagram("anagram".to_string(), "Nag a ram".to_string()));
+        assert!(is_anagram("iceman".to_string(), "cinema".to_string()));
+        assert!(!is_anagram("foo".to_string(), "of".to_string()));
     }
 }
