@@ -45,18 +45,17 @@ pub fn rgb_to_hex(r: i32, g: i32, b: i32) -> String {
 /// assert_eq!("Foo Bar".to_string(), capitalize_every_word("foo bar".to_string()));
 /// ```
 pub fn capitalize_every_word(sentence: String) -> String {
-    let words: Vec<&str> = sentence.split(' ').collect();
-    let mut result: Vec<String> = Vec::new();
-
-    for word in &words {
-        result.push(format!(
-            "{}{}",
-            word.chars().next().unwrap().to_uppercase().to_string(),
-            &word[1..]
-        ));
-    }
-
-    result.join(" ")
+    sentence
+        .split(' ')
+        .map(|word| {
+            format!(
+                "{}{}",
+                word.chars().next().unwrap().to_uppercase(),
+                &word[1..]
+            )
+        })
+        .collect::<Vec<_>>()
+        .join(" ")
 }
 
 /// Converts a string to camelcase.
