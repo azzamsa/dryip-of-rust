@@ -29,6 +29,9 @@ jobs:
           profile: minimal # no documentation
           components: clippy, rustfmt
 
+      - name: Cache
+        uses: Swatinem/rust-cache@v1
+
       - name: Ensure `cargo fmt` has been run
         uses: actions-rs/cargo@v1
         with:
@@ -42,7 +45,7 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: clippy
-          args: --locked --all-targets --all-features
+          args: --all-targets --all-features
 
 
   min_version:
@@ -61,11 +64,14 @@ jobs:
           default: true
           profile: minimal
 
+      - name: Cache
+        uses: Swatinem/rust-cache@v1
+
       - name: Run tests
         uses: actions-rs/cargo@v1
         with:
           command: test
-          args: --locked
+          args: --verbose
 
 
   build:
@@ -94,6 +100,9 @@ jobs:
           override: true
           profile: minimal
 
+      - name: Cache
+        uses: Swatinem/rust-cache@v1
+
       - name: Show version information (Rust, cargo, GCC)
         shell: bash
         run: |
@@ -109,14 +118,14 @@ jobs:
         with:
           use-cross: ${{ matrix.job.use-cross }}
           command: build
-          args: --locked --release --target=${{ matrix.job.target }}
+          args: --verbose --release --target=${{ matrix.job.target }}
 
       - name: Run tests
         uses: actions-rs/cargo@v1
         with:
           use-cross: ${{ matrix.job.use-cross }}
           command: test
-          args: --locked --target=${{ matrix.job.target }}
+          args: --verbose --target=${{ matrix.job.target }}
 
   documentation:
     name: Documentation
@@ -135,13 +144,16 @@ jobs:
           profile: minimal # no documentation
           components: clippy, rustfmt
 
+      - name: Cache
+        uses: Swatinem/rust-cache@v1
+
       - name: Check documentation
         env:
           RUSTDOCFLAGS: -D warnings
         uses: actions-rs/cargo@v1
         with:
           command: doc
-          args: --locked --no-deps --document-private-items --all-features
+          args: --verbose --no-deps --document-private-items --all-features
 
       - name: Prepare documentation
         run: |
@@ -174,6 +186,9 @@ jobs:
           default: true
           profile: minimal # no documentation
           components: clippy, rustfmt
+
+      - name: Cache
+        uses: Swatinem/rust-cache@v1
 
       - name: Run cargo-tarpaulin
         uses: actions-rs/tarpaulin@v0.1
