@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["capitalize_every_word","Capitalize every word."],["hex_to_rgb","Convert HEX into RGB value."],["rgb_to_hex","Convert RGB into HEX value."]]});

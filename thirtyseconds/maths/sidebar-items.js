@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["average","Calculate the average of two or more numbers."]]});

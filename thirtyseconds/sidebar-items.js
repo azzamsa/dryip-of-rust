@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["all_equal","Check if all value in given list are equal."],["all_unique","Check if all value in given list are unique."],["average","Calculate the average of two or more numbers."],["capitalize_every_word","Capitalize every word."],["find_multiples","Returns a list of numbers in the arithmetic progression starting with the given positive integer and up to the specified limit."],["hex_to_rgb","Convert HEX into RGB value."],["rgb_to_hex","Convert RGB into HEX value."]]});
+initSidebarItems({"mod":[["arrays",""],["maths",""],["strings",""]]});
