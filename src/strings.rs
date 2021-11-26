@@ -47,13 +47,7 @@ pub fn rgb_to_hex(r: i32, g: i32, b: i32) -> String {
 pub fn capitalize_every_word(sentence: String) -> String {
     sentence
         .split(' ')
-        .map(|word| {
-            format!(
-                "{}{}",
-                word.chars().next().unwrap().to_uppercase(),
-                &word[1..]
-            )
-        })
+        .map(|word| format!("{}{}", &word[..1].to_uppercase(), &word[1..]))
         .collect::<Vec<_>>()
         .join(" ")
 }
@@ -79,11 +73,7 @@ pub fn to_camelcase(sentence: String) -> String {
             if index == 0 {
                 word.to_lowercase()
             } else {
-                format!(
-                    "{}{}",
-                    word.chars().next().unwrap().to_uppercase(),
-                    &word[1..]
-                )
+                format!("{}{}", &word[..1].to_uppercase(), &word[1..])
             }
         })
         .collect()
