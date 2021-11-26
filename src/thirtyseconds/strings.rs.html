@@ -126,20 +126,36 @@
 <span id="126">126</span>
 <span id="127">127</span>
 <span id="128">128</span>
+<span id="129">129</span>
+<span id="130">130</span>
+<span id="131">131</span>
+<span id="132">132</span>
+<span id="133">133</span>
+<span id="134">134</span>
+<span id="135">135</span>
+<span id="136">136</span>
+<span id="137">137</span>
+<span id="138">138</span>
+<span id="139">139</span>
+<span id="140">140</span>
+<span id="141">141</span>
 </pre><pre class="rust"><code><span class="doccomment">/// Convert HEX into RGB value.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// - Convert string slice to integer using [from_str_radix].</span>
+<span class="doccomment">/// - Iterate through fixed index for the hex input.</span>
+<span class="doccomment">/// - Put the result into a vector.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Basic usage:</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// use thirtyseconds::strings::hex_to_rgb;</span>
-<span class="doccomment">///</span>
+<span class="doccomment">/// ```rust</span>
+<span class="doccomment">/// # use thirtyseconds::strings::hex_to_rgb;</span>
 <span class="doccomment">/// assert_eq!(vec![255, 165, 1], hex_to_rgb(&quot;FFA501&quot;));</span>
 <span class="doccomment">/// ```</span>
+<span class="doccomment">/// [from_str_radix]: https://doc.rust-lang.org/std/primitive.i64.html#method.from_str_radix</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">hex_to_rgb</span>(<span class="ident">hex</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i64</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">to_base16</span> <span class="op">=</span> <span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">i64::from_str_radix</span>(<span class="ident">x</span>, <span class="number">16</span>);
-    <span class="comment">// NOTE can we use tuple as return type</span>
     [<span class="number">0</span>, <span class="number">2</span>, <span class="number">4</span>]
         .<span class="ident">iter</span>()
         .<span class="ident">map</span>(<span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">x</span><span class="op">|</span> <span class="ident">to_base16</span>(<span class="kw-2">&amp;</span><span class="ident">hex</span>[<span class="ident">x</span>..<span class="ident">x</span> <span class="op">+</span> <span class="number">2</span>]).<span class="ident">unwrap</span>())
@@ -148,30 +164,36 @@
 
 <span class="doccomment">/// Convert RGB into HEX value.</span>
 <span class="doccomment">///</span>
+<span class="doccomment">/// Use [UpperHex] to format the string.</span>
+<span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Basic usage:</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// use thirtyseconds::strings::rgb_to_hex;</span>
-<span class="doccomment">///</span>
+<span class="doccomment">/// ```rust</span>
+<span class="doccomment">/// # use thirtyseconds::strings::rgb_to_hex;</span>
 <span class="doccomment">/// assert_eq!(&quot;FFA501&quot;, rgb_to_hex(255, 165, 1));</span>
 <span class="doccomment">/// ```</span>
+<span class="doccomment">/// [UpperHex]: https://doc.rust-lang.org/std/fmt/trait.UpperHex.html</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rgb_to_hex</span>(<span class="ident">r</span>: <span class="ident">i32</span>, <span class="ident">g</span>: <span class="ident">i32</span>, <span class="ident">b</span>: <span class="ident">i32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">String</span> {
     <span class="macro">format!</span>(<span class="string">&quot;{:02X}{:02X}{:02X}&quot;</span>, <span class="ident">r</span>, <span class="ident">g</span>, <span class="ident">b</span>)
 }
 
 <span class="doccomment">/// Capitalize every word.</span>
 <span class="doccomment">///</span>
+<span class="doccomment">/// - Split the sentence by whitespace using `split()`.</span>
+<span class="doccomment">/// - Iterate through each word using `map()`.</span>
+<span class="doccomment">/// - Use [RangeFull] notation to get the first char uppercased and left the rest as is.</span>
+<span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Basic usage:</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// use thirtyseconds::strings::capitalize_every_word;</span>
-<span class="doccomment">///</span>
+<span class="doccomment">/// ```rust</span>
+<span class="doccomment">/// # use thirtyseconds::strings::capitalize_every_word;</span>
 <span class="doccomment">/// assert_eq!(&quot;Foo Bar&quot;.to_string(), capitalize_every_word(&quot;foo bar&quot;.to_string()));</span>
 <span class="doccomment">/// ```</span>
+<span class="doccomment">/// [RangeFull]: https://doc.rust-lang.org/std/ops/struct.RangeFull.html</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">capitalize_every_word</span>(<span class="ident">sentence</span>: <span class="ident">String</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">String</span> {
     <span class="ident">sentence</span>
         .<span class="ident">split</span>(<span class="string">&#39; &#39;</span>)
@@ -182,15 +204,19 @@
 
 <span class="doccomment">/// Converts a string to camelcase.</span>
 <span class="doccomment">///</span>
+<span class="doccomment">/// - Replace any - or _ with a space, using the `replace()`.</span>
+<span class="doccomment">/// - Use `enumerate()` to check for the first word.</span>
+<span class="doccomment">/// - Use [RangeFull] notation to get the first char uppercased and left the rest as is.</span>
+<span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Basic usage:</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// use thirtyseconds::strings::to_camelcase;</span>
-<span class="doccomment">///</span>
+<span class="doccomment">/// ```rust</span>
+<span class="doccomment">/// # use thirtyseconds::strings::to_camelcase;</span>
 <span class="doccomment">/// assert_eq!(&quot;fooBar&quot;.to_string(), to_camelcase(&quot;foo bar&quot;.to_string()));</span>
 <span class="doccomment">/// ```</span>
+<span class="doccomment">/// [RangeFull]: https://doc.rust-lang.org/std/ops/struct.RangeFull.html</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_camelcase</span>(<span class="ident">sentence</span>: <span class="ident">String</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">String</span> {
     <span class="ident">sentence</span>
         .<span class="ident">replace</span>(<span class="string">&quot;-&quot;</span>, <span class="string">&quot; &quot;</span>)

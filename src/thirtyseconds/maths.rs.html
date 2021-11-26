@@ -23,15 +23,17 @@
 <span id="23">23</span>
 <span id="24">24</span>
 <span id="25">25</span>
+<span id="26">26</span>
 </pre><pre class="rust"><code><span class="doccomment">/// Calculate the average of two or more numbers.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Use `sum()` to sum all of the args provided, divide by `args.len()`.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Basic usage:</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// use thirtyseconds::maths::average;</span>
-<span class="doccomment">///</span>
+<span class="doccomment">/// ```rust</span>
+<span class="doccomment">/// # use thirtyseconds::maths::average;</span>
 <span class="doccomment">/// assert_eq!(2.0, average(vec![1, 2, 3]));</span>
 <span class="doccomment">/// ```</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">average</span>(<span class="ident">nums</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f32</span> {

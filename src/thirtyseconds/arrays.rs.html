@@ -67,33 +67,39 @@
 <span id="67">67</span>
 <span id="68">68</span>
 <span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::collections::HashSet</span>;
 
 <span class="doccomment">/// Check if all value in given list are equal.</span>
 <span class="doccomment">///</span>
+<span class="doccomment">/// Use `HashSet` to eliminate duplicate elements and then use len() to check if length is 1.</span>
+<span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Basic usage:</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// use thirtyseconds::arrays::all_equal;</span>
-<span class="doccomment">///</span>
+<span class="doccomment">/// ```rust</span>
+<span class="doccomment">/// # use thirtyseconds::arrays::all_equal;</span>
 <span class="doccomment">/// assert!(all_equal(vec![2, 2, 2]));</span>
 <span class="doccomment">/// ```</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">all_equal</span>(<span class="ident">lst</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-    <span class="comment">// don&#39;t compare the list as is. only part of it.</span>
-    <span class="ident">lst</span>[<span class="number">1</span>..] <span class="op">=</span><span class="op">=</span> <span class="ident">lst</span>[..<span class="ident">lst</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span>]
+    <span class="ident">lst</span>.<span class="ident">into_iter</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span><span class="op">&gt;</span>().<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="number">1</span>
 }
 
 <span class="doccomment">/// Check if all value in given list are unique.</span>
 <span class="doccomment">///</span>
+<span class="doccomment">/// - Use `HashSet` on the given vector to keep only unique occurrences.</span>
+<span class="doccomment">/// - Use len() to compare the length of the unique values to the original list.</span>
+<span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Basic usage:</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// use thirtyseconds::arrays::all_unique;</span>
-<span class="doccomment">///</span>
+<span class="doccomment">/// ```rust</span>
+<span class="doccomment">/// # use thirtyseconds::arrays::all_unique;</span>
 <span class="doccomment">/// assert!(all_unique(vec![1, 2, 3]));</span>
 <span class="doccomment">/// ```</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">all_unique</span>(<span class="ident">lst</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
@@ -103,17 +109,19 @@
 <span class="doccomment">/// Returns a list of numbers in the arithmetic progression starting with the</span>
 <span class="doccomment">/// given positive integer and up to the specified limit.</span>
 <span class="doccomment">///</span>
+<span class="doccomment">/// Use [Range] to and increment it using `step_by()`</span>
+<span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Basic usage:</span>
 <span class="doccomment">///</span>
+<span class="doccomment">/// ```rust</span>
+<span class="doccomment">/// # use thirtyseconds::arrays::arithmetic_progression;</span>
+<span class="doccomment">/// assert_eq!(vec![5, 10, 15, 20, 25], arithmetic_progression(5, 25));</span>
 <span class="doccomment">/// ```</span>
-<span class="doccomment">/// use thirtyseconds::arrays::find_multiples;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// assert_eq!(vec![5, 10, 15, 20, 25], find_multiples(5, 25));</span>
-<span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">find_multiples</span>(<span class="ident">n</span>: <span class="ident">i32</span>, <span class="ident">lim</span>: <span class="ident">i32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span> {
-    (<span class="ident">n</span>..<span class="ident">lim</span> <span class="op">+</span> <span class="number">1</span>).<span class="ident">step_by</span>(<span class="ident">n</span> <span class="kw">as</span> <span class="ident">usize</span>).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span><span class="op">&gt;</span>()
+<span class="doccomment">/// [Range]: https://doc.rust-lang.org/std/ops/struct.Range.html</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">arithmetic_progression</span>(<span class="ident">n</span>: <span class="ident">i32</span>, <span class="ident">lim</span>: <span class="ident">i32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span> {
+    (<span class="ident">n</span>..<span class="op">=</span><span class="ident">lim</span>).<span class="ident">step_by</span>(<span class="ident">n</span> <span class="kw">as</span> <span class="ident">usize</span>).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span><span class="op">&gt;</span>()
 }
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
@@ -131,9 +139,9 @@
         <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">all_unique</span>(<span class="macro">vec!</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]));
     }
     <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_find_multiples</span>() {
-        <span class="macro">assert_eq!</span>(<span class="macro">vec!</span>[<span class="number">5</span>, <span class="number">10</span>, <span class="number">15</span>, <span class="number">20</span>, <span class="number">25</span>], <span class="ident">find_multiples</span>(<span class="number">5</span>, <span class="number">25</span>));
-        <span class="macro">assert_eq!</span>(<span class="macro">vec!</span>[<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">10</span>], <span class="ident">find_multiples</span>(<span class="number">2</span>, <span class="number">10</span>));
+    <span class="kw">fn</span> <span class="ident">test_arithmetic_progression</span>() {
+        <span class="macro">assert_eq!</span>(<span class="macro">vec!</span>[<span class="number">5</span>, <span class="number">10</span>, <span class="number">15</span>, <span class="number">20</span>, <span class="number">25</span>], <span class="ident">arithmetic_progression</span>(<span class="number">5</span>, <span class="number">25</span>));
+        <span class="macro">assert_eq!</span>(<span class="macro">vec!</span>[<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">10</span>], <span class="ident">arithmetic_progression</span>(<span class="number">2</span>, <span class="number">10</span>));
     }
 }
 </code></pre></div>
