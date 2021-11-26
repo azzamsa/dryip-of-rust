@@ -11,7 +11,7 @@
 /// ```
 pub fn hex_to_rgb(hex: &str) -> Vec<i64> {
     let to_base16 = |x| i64::from_str_radix(x, 16);
-    // MAYBE can I collect as tuple directly?
+    // NOTE can we use tuple as return type
     [0, 2, 4]
         .iter()
         .map(|&x| to_base16(&hex[x..x + 2]).unwrap())
