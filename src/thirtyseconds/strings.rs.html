@@ -80,6 +80,12 @@
 <span id="80">80</span>
 <span id="81">81</span>
 <span id="82">82</span>
+<span id="83">83</span>
+<span id="84">84</span>
+<span id="85">85</span>
+<span id="86">86</span>
+<span id="87">87</span>
+<span id="88">88</span>
 </pre><pre class="rust"><code><span class="doccomment">/// Convert HEX into RGB value.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
@@ -87,7 +93,9 @@
 <span class="doccomment">/// Basic usage:</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
-<span class="doccomment">/// assert_eq!(vec![255, 165, 1], thirtyseconds::hex_to_rgb(&amp;&quot;FFA501&quot;));</span>
+<span class="doccomment">/// use thirtyseconds::strings::hex_to_rgb;</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// assert_eq!(vec![255, 165, 1], hex_to_rgb(&quot;FFA501&quot;));</span>
 <span class="doccomment">/// ```</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">hex_to_rgb</span>(<span class="ident">hex</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i64</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">to_base16</span> <span class="op">=</span> <span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">i64::from_str_radix</span>(<span class="ident">x</span>, <span class="number">16</span>);
@@ -105,7 +113,9 @@
 <span class="doccomment">/// Basic usage:</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
-<span class="doccomment">/// assert_eq!(&quot;FFA501&quot;, thirtyseconds::rgb_to_hex(255, 165, 1));</span>
+<span class="doccomment">/// use thirtyseconds::strings::rgb_to_hex;</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// assert_eq!(&quot;FFA501&quot;, rgb_to_hex(255, 165, 1));</span>
 <span class="doccomment">/// ```</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rgb_to_hex</span>(<span class="ident">r</span>: <span class="ident">i32</span>, <span class="ident">g</span>: <span class="ident">i32</span>, <span class="ident">b</span>: <span class="ident">i32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">String</span> {
     <span class="macro">format!</span>(<span class="string">&quot;{:02X}{:02X}{:02X}&quot;</span>, <span class="ident">r</span>, <span class="ident">g</span>, <span class="ident">b</span>)
@@ -118,7 +128,9 @@
 <span class="doccomment">/// Basic usage:</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
-<span class="doccomment">/// assert_eq!(&quot;Foo Bar&quot;.to_string(), thirtyseconds::capitalize_every_word(&quot;foo bar&quot;.to_string()));</span>
+<span class="doccomment">/// use thirtyseconds::strings::capitalize_every_word;</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// assert_eq!(&quot;Foo Bar&quot;.to_string(), capitalize_every_word(&quot;foo bar&quot;.to_string()));</span>
 <span class="doccomment">/// ```</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">capitalize_every_word</span>(<span class="ident">sentence</span>: <span class="ident">String</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">String</span> {
     <span class="kw">let</span> <span class="ident">words</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">sentence</span>.<span class="ident">split</span>(<span class="string">&#39; &#39;</span>).<span class="ident">collect</span>();

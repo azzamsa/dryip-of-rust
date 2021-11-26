@@ -21,6 +21,8 @@
 <span id="21">21</span>
 <span id="22">22</span>
 <span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
 </pre><pre class="rust"><code><span class="doccomment">/// Calculate the average of two or more numbers.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
@@ -28,7 +30,9 @@
 <span class="doccomment">/// Basic usage:</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
-<span class="doccomment">/// assert_eq!(2.0, thirtyseconds::average(vec![1, 2, 3]));</span>
+<span class="doccomment">/// use thirtyseconds::maths::average;</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// assert_eq!(2.0, average(vec![1, 2, 3]));</span>
 <span class="doccomment">/// ```</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">average</span>(<span class="ident">nums</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f32</span> {
     (<span class="ident">nums</span>.<span class="ident">iter</span>().<span class="ident">sum</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>() <span class="op">/</span> <span class="ident">nums</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">u32</span>) <span class="kw">as</span> <span class="ident">f32</span>

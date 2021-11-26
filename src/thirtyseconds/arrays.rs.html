@@ -61,6 +61,12 @@
 <span id="61">61</span>
 <span id="62">62</span>
 <span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::collections::HashSet</span>;
 
 <span class="doccomment">/// Check if all value in given list are equal.</span>
@@ -70,7 +76,9 @@
 <span class="doccomment">/// Basic usage:</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
-<span class="doccomment">/// assert_eq!(true, thirtyseconds::all_equal(vec![2, 2, 2]));</span>
+<span class="doccomment">/// use thirtyseconds::arrays::all_equal;</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// assert!(all_equal(vec![2, 2, 2]));</span>
 <span class="doccomment">/// ```</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">all_equal</span>(<span class="ident">lst</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
     <span class="comment">// don&#39;t compare the list as is. only part of it.</span>
@@ -84,7 +92,9 @@
 <span class="doccomment">/// Basic usage:</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
-<span class="doccomment">/// assert_eq!(true, thirtyseconds::all_unique(vec![1, 2, 3]));</span>
+<span class="doccomment">/// use thirtyseconds::arrays::all_unique;</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// assert!(all_unique(vec![1, 2, 3]));</span>
 <span class="doccomment">/// ```</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">all_unique</span>(<span class="ident">lst</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
     <span class="ident">lst</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="ident">lst</span>.<span class="ident">into_iter</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span><span class="op">&gt;</span>().<span class="ident">len</span>()
@@ -98,7 +108,9 @@
 <span class="doccomment">/// Basic usage:</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
-<span class="doccomment">/// assert_eq!(vec![5, 10, 15, 20, 25], thirtyseconds::find_multiples(5, 25));</span>
+<span class="doccomment">/// use thirtyseconds::arrays::find_multiples;</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// assert_eq!(vec![5, 10, 15, 20, 25], find_multiples(5, 25));</span>
 <span class="doccomment">/// ```</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">find_multiples</span>(<span class="ident">n</span>: <span class="ident">i32</span>, <span class="ident">lim</span>: <span class="ident">i32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span> {
     (<span class="ident">n</span>..<span class="ident">lim</span> <span class="op">+</span> <span class="number">1</span>).<span class="ident">step_by</span>(<span class="ident">n</span> <span class="kw">as</span> <span class="ident">usize</span>).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span><span class="op">&gt;</span>()
