@@ -139,6 +139,38 @@
 <span id="139">139</span>
 <span id="140">140</span>
 <span id="141">141</span>
+<span id="142">142</span>
+<span id="143">143</span>
+<span id="144">144</span>
+<span id="145">145</span>
+<span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
+<span id="150">150</span>
+<span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
+<span id="156">156</span>
+<span id="157">157</span>
+<span id="158">158</span>
+<span id="159">159</span>
+<span id="160">160</span>
+<span id="161">161</span>
+<span id="162">162</span>
+<span id="163">163</span>
+<span id="164">164</span>
+<span id="165">165</span>
+<span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+<span id="169">169</span>
+<span id="170">170</span>
+<span id="171">171</span>
+<span id="172">172</span>
+<span id="173">173</span>
 </pre><pre class="rust"><code><span class="doccomment">/// Convert HEX into RGB value.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// - Convert string slice to integer using [from_str_radix].</span>
@@ -233,6 +265,32 @@
         .<span class="ident">collect</span>()
 }
 
+<span class="doccomment">/// Checks if a string is an anagram of another string (case-insensitive, ignores spaces, punctuation and special characters).</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// - Remove any whitespace using `replace()`.</span>
+<span class="doccomment">/// - Lowercase all the string using `to_lowercase()`.</span>
+<span class="doccomment">/// - Compare the lengths of the both, return False if they are not equal.</span>
+<span class="doccomment">/// - If they have the same length, sort the string and compare.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// # Examples</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Basic usage:</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ```rust</span>
+<span class="doccomment">/// # use thirtyseconds::strings::is_anagram;</span>
+<span class="doccomment">/// assert!(is_anagram(&quot;iceman&quot;.to_string(), &quot;cinema&quot;.to_string()));</span>
+<span class="doccomment">/// ```</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_anagram</span>(<span class="ident">sentence1</span>: <span class="ident">String</span>, <span class="ident">sentence2</span>: <span class="ident">String</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">let</span> <span class="ident">sentence1_</span> <span class="op">=</span> <span class="ident">sentence1</span>.<span class="ident">replace</span>(<span class="string">&quot; &quot;</span>, <span class="string">&quot;&quot;</span>).<span class="ident">to_lowercase</span>();
+    <span class="kw">let</span> <span class="ident">sentence2_</span> <span class="op">=</span> <span class="ident">sentence2</span>.<span class="ident">replace</span>(<span class="string">&quot; &quot;</span>, <span class="string">&quot;&quot;</span>).<span class="ident">to_lowercase</span>();
+
+    <span class="kw">if</span> <span class="ident">sentence1_</span>.<span class="ident">len</span>() <span class="op">!</span><span class="op">=</span> <span class="ident">sentence2_</span>.<span class="ident">len</span>() {
+        <span class="bool-val">false</span>
+    } <span class="kw">else</span> {
+        <span class="ident"><span class="kw">crate</span>::sorted</span>(<span class="ident">sentence1_</span>) <span class="op">=</span><span class="op">=</span> <span class="ident"><span class="kw">crate</span>::sorted</span>(<span class="ident">sentence2_</span>)
+    }
+}
+
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">tests</span> {
     <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
@@ -278,6 +336,12 @@
             <span class="string">&quot;someMixedStringWithSpacesUnderscoresAndHyphens&quot;</span>.<span class="ident">to_string</span>(),
             <span class="ident">to_camelcase</span>(<span class="string">&quot;some-mixed_string with spaces_underscores-and-hyphens&quot;</span>.<span class="ident">to_string</span>())
         )
+    }
+    <span class="attribute">#[<span class="ident">test</span>]</span>
+    <span class="kw">fn</span> <span class="ident">test_is_anagram</span>() {
+        <span class="macro">assert!</span>(<span class="ident">is_anagram</span>(<span class="string">&quot;anagram&quot;</span>.<span class="ident">to_string</span>(), <span class="string">&quot;Nag a ram&quot;</span>.<span class="ident">to_string</span>()));
+        <span class="macro">assert!</span>(<span class="ident">is_anagram</span>(<span class="string">&quot;iceman&quot;</span>.<span class="ident">to_string</span>(), <span class="string">&quot;cinema&quot;</span>.<span class="ident">to_string</span>()));
+        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">is_anagram</span>(<span class="string">&quot;foo&quot;</span>.<span class="ident">to_string</span>(), <span class="string">&quot;of&quot;</span>.<span class="ident">to_string</span>()));
     }
 }
 </code></pre></div>

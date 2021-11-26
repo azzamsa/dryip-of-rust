@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["arrays",""],["maths",""],["strings",""]]});
+initSidebarItems({"fn":[["sorted",""]],"mod":[["arrays",""],["maths",""],["strings",""]]});

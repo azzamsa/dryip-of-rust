@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["capitalize_every_word","Capitalize every word."],["hex_to_rgb","Convert HEX into RGB value."],["rgb_to_hex","Convert RGB into HEX value."],["to_camelcase","Converts a string to camelcase."]]});
+initSidebarItems({"fn":[["capitalize_every_word","Capitalize every word."],["hex_to_rgb","Convert HEX into RGB value."],["is_anagram","Checks if a string is an anagram of another string (case-insensitive, ignores spaces, punctuation and special characters)."],["rgb_to_hex","Convert RGB into HEX value."],["to_camelcase","Converts a string to camelcase."]]});
