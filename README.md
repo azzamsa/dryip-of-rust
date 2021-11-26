@@ -7,6 +7,9 @@ Short Rust 🦀 code snippets for inspiration.
 <a href="https://github.com/azzamsa/30-seconds-of-rust/workflows/ci.yml">
     <img src="https://github.com/azzamsa/30-seconds-of-rust/workflows/ci/badge.svg" alt="Build status" />
 </a>
+<a href="https://codecov.io/gh/azzamsa/30-seconds-of-rust">
+    <img src="https://codecov.io/gh/azzamsa/30-seconds-of-rust/branch/master/graph/badge.svg" alt="Code Coverage" />
+</a>
 
 </div>
 
