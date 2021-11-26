@@ -1,3 +1,6 @@
+#![doc(html_logo_url = "https://rustacean.net/assets/cuddlyferris.png")]
+#![doc(html_favicon_url = "https://rustacean.net/assets/cuddlyferris.png")]
+
 //! # 30 Seconds of Rust 🦀
 //!
 //! Hello, and welcome to the 30 Seconds of Rust 🦀 website! 👋
