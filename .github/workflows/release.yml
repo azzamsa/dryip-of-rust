@@ -1,0 +1,33 @@
+name: release
+
+on:
+  push:
+    tags:
+    - "[0-9]+.[0-9]+.[0-9]+"
+
+jobs:
+  publish:
+    name: Publish for
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+
+      - name: Install rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          default: true
+          profile: minimal # no documentation
+          components: clippy, rustfmt
+
+      - name: Cache
+        uses: Swatinem/rust-cache@v1
+
+      - name: Publish to crates.io
+        uses: katyo/publish-crates@v1
+        with:
+          registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+

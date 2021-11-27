@@ -10,6 +10,8 @@ on:
     branches:
       - master
       - main
+  schedule:
+    - cron: '00 01 * * *'
 
 jobs:
   code_quality:
@@ -73,6 +75,11 @@ jobs:
           command: test
           args: --verbose
 
+      - uses: GoogleCloudPlatform/release-please-action@v2
+        with:
+           token: ${{ secrets.GH_TOKEN }}
+           release-type: rust
+           package-name: release-please-action
 
   build:
     name: ${{ matrix.job.os }} (${{ matrix.job.target }})
