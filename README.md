@@ -17,7 +17,7 @@ Short Rust 🦀 code snippets for inspiration.
 
 ## Usage
 
-- Visit [the website](https://azzamsa.github.io/dryip-of-rust/) to view the snippets.
+- Visit [the website](https://docs.rs/dryip/) to view the snippets.
 - Click the `[SRC]` button at the top to see the complete source code.
 
 ## Credits
