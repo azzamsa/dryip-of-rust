@@ -1,7 +1,7 @@
 [package]
 name = "dryip"
 description = "Short 🩸 Rust 🦀 code snippets for inspiration."
-version = "0.1.6"
+version = "0.1.7"
 authors = ["azzamsa <me@azzamsa.com>"]
 edition = "2021"
 keywords = ["algorithms", "dryip"]

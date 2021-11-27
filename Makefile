@@ -22,5 +22,5 @@ release:  ##
 	bash scripts/release.sh $(version)
 
 
-.PHONY: help verify_light verify  is_verified
+.PHONY: help verify_light verify is_verified release
 .DEFAULT_GOAL := help
