@@ -34,10 +34,19 @@ pub fn sorted(word: &str) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use proptest::prelude::*;
 
     #[test]
     fn test_sorted() {
         assert_eq!("aaagmnr", sorted("anagram"));
         assert_eq!("aceimn", sorted("iceman"));
+    }
+
+    proptest! {
+        #[test]
+        fn strings(s in "\\PC*") {
+            println!("test input: {:?}", s);
+            sorted(&s);
+        }
     }
 }
