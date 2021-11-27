@@ -51,7 +51,7 @@
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">maths</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">strings</span>;
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">sorted</span>(<span class="ident">word</span>: <span class="ident">String</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">String</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">sorted</span>(<span class="ident">word</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">String</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">chars_</span> <span class="op">=</span> <span class="ident">word</span>.<span class="ident">chars</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span><span class="op">&gt;</span>();
     <span class="comment">// TODO rust currently doesn&#39;t have non-mutating sort function</span>
     <span class="comment">// https://github.com/rust-lang/rfcs/issues/2731</span>
@@ -68,8 +68,8 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_sorted</span>() {
-        <span class="macro">assert_eq!</span>(<span class="string">&quot;aaagmnr&quot;</span>.<span class="ident">to_string</span>(), <span class="ident">sorted</span>(<span class="string">&quot;anagram&quot;</span>.<span class="ident">to_string</span>()));
-        <span class="macro">assert_eq!</span>(<span class="string">&quot;aceimn&quot;</span>.<span class="ident">to_string</span>(), <span class="ident">sorted</span>(<span class="string">&quot;iceman&quot;</span>.<span class="ident">to_string</span>()));
+        <span class="macro">assert_eq!</span>(<span class="string">&quot;aaagmnr&quot;</span>, <span class="ident">sorted</span>(<span class="string">&quot;anagram&quot;</span>));
+        <span class="macro">assert_eq!</span>(<span class="string">&quot;aceimn&quot;</span>, <span class="ident">sorted</span>(<span class="string">&quot;iceman&quot;</span>));
     }
 }
 </code></pre></div>
