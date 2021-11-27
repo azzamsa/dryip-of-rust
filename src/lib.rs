@@ -1,5 +1,11 @@
-#![doc(html_logo_url = "https://rustacean.net/assets/cuddlyferris.png")]
-#![doc(html_favicon_url = "https://rustacean.net/assets/cuddlyferris.png")]
+#![doc(
+    html_logo_url = "https://raw.githubusercontent.com/azzamsa/drip-of-rust/master/docs/drip.svg
+"
+)]
+#![doc(
+    html_favicon_url = "https://raw.githubusercontent.com/azzamsa/drip-of-rust/master/docs/drip.svg
+"
+)]
 
 //! # 30 Seconds of Rust 🦀
 //!

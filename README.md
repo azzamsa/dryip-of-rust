@@ -1,14 +1,14 @@
 <div align="center">
-<h1>30 Seconds of Rust</h1>
-<img src='https://rustacean.net/assets/cuddlyferris.png' width=150px/>
+<h1>Dryip of Rust</h1>
+<img src='docs/drip.svg' width=80px/>
 
 Short Rust 🦀 code snippets for inspiration.
 
-<a href="https://github.com/azzamsa/30-seconds-of-rust/workflows/ci.yml">
-    <img src="https://github.com/azzamsa/30-seconds-of-rust/workflows/ci/badge.svg" alt="Build status" />
+<a href="https://github.com/azzamsa/dryip-of-rust/workflows/ci.yml">
+    <img src="https://github.com/azzamsa/dryip-of-rust/workflows/ci/badge.svg" alt="Build status" />
 </a>
-<a href="https://codecov.io/gh/azzamsa/30-seconds-of-rust">
-    <img src="https://codecov.io/gh/azzamsa/30-seconds-of-rust/branch/master/graph/badge.svg" alt="Code Coverage" />
+<a href="https://codecov.io/gh/azzamsa/dryip-of-rust">
+    <img src="https://codecov.io/gh/azzamsa/dryip-of-rust/branch/master/graph/badge.svg" alt="Code Coverage" />
 </a>
 
 </div>
@@ -17,10 +17,10 @@ Short Rust 🦀 code snippets for inspiration.
 
 ## Usage
 
-- Visit [the website](https://azzamsa.github.io/30-seconds-of-rust/) to view the snippets.
+- Visit [the website](https://azzamsa.github.io/dryip-of-rust/) to view the snippets.
 - Click the `[SRC]` button at the top to see the complete source code.
 
 ## Credits
 
-- The code is ported from [30-seconds-of-code-js](https://github.com/30-seconds/30-seconds-of-code/tree/4cf744a38c45d09fe552f9b90d7485926097e91e/) and [30-seconds-of-python](https://github.com/30-seconds/30-seconds-of-python/tree/e6064b1236bbe64f0a7f4e1127223b75848b92e8/)
-- Ferris logo by [rustacean.net](https://rustacean.net/)
+- [30-seconds-of-code](https://github.com/30-seconds/30-seconds-of-code)
+- Drop water by BomSymbols from the Noun Project

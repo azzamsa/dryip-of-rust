@@ -1,14 +1,14 @@
 [package]
-name = "thirtyseconds"
-description = "Short Rust 🦀 code snippets for inspiration."
-version = "0.1.1"
+name = "dryip"
+description = "Short 🩸 Rust 🦀 code snippets for inspiration."
+version = "0.1.5"
 authors = ["azzamsa <me@azzamsa.com>"]
 edition = "2021"
-keywords = ["algorithms", "30-seconds"]
+keywords = ["algorithms", "dryip"]
 categories = ["algorithms"]
 readme = "README.md"
-license = "CC-BY-4.0"
-repository = "https://github.com/azzamsa/30-seconds-of-rust"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/azzamsa/dryip-of-rust"
 
 [dev-dependencies]
 proptest = "1.0.0"

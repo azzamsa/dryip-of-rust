@@ -9,7 +9,7 @@
 /// Basic usage:
 ///
 /// ```rust
-/// # use thirtyseconds::strings::hex_to_rgb;
+/// # use dryip::strings::hex_to_rgb;
 /// assert_eq!(vec![255, 165, 1], hex_to_rgb("FFA501"));
 /// ```
 /// [from_str_radix]: https://doc.rust-lang.org/std/primitive.i64.html#method.from_str_radix
@@ -30,7 +30,7 @@ pub fn hex_to_rgb(hex: &str) -> Vec<i64> {
 /// Basic usage:
 ///
 /// ```rust
-/// # use thirtyseconds::strings::rgb_to_hex;
+/// # use dryip::strings::rgb_to_hex;
 /// assert_eq!("FFA501", rgb_to_hex(255, 165, 1));
 /// ```
 /// [UpperHex]: https://doc.rust-lang.org/std/fmt/trait.UpperHex.html
@@ -49,7 +49,7 @@ pub fn rgb_to_hex(r: i32, g: i32, b: i32) -> String {
 /// Basic usage:
 ///
 /// ```rust
-/// # use thirtyseconds::strings::capitalize_every_word;
+/// # use dryip::strings::capitalize_every_word;
 /// assert_eq!("Foo Bar", capitalize_every_word("foo bar"));
 /// ```
 /// [RangeFull]: https://doc.rust-lang.org/std/ops/struct.RangeFull.html
@@ -72,7 +72,7 @@ pub fn capitalize_every_word(sentence: &str) -> String {
 /// Basic usage:
 ///
 /// ```rust
-/// # use thirtyseconds::strings::to_camelcase;
+/// # use dryip::strings::to_camelcase;
 /// assert_eq!("fooBar", to_camelcase("foo bar"));
 /// ```
 /// [RangeFull]: https://doc.rust-lang.org/std/ops/struct.RangeFull.html
@@ -104,7 +104,7 @@ pub fn to_camelcase(sentence: &str) -> String {
 /// Basic usage:
 ///
 /// ```rust
-/// # use thirtyseconds::strings::is_anagram;
+/// # use dryip::strings::is_anagram;
 /// assert!(is_anagram("iceman", "cinema"));
 /// ```
 pub fn is_anagram(sentence1: &str, sentence2: &str) -> bool {

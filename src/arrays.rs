@@ -9,7 +9,7 @@ use std::collections::HashSet;
 /// Basic usage:
 ///
 /// ```rust
-/// # use thirtyseconds::arrays::all_equal;
+/// # use dryip::arrays::all_equal;
 /// assert!(all_equal(vec![2, 2, 2]));
 /// ```
 pub fn all_equal(lst: Vec<u32>) -> bool {
@@ -26,7 +26,7 @@ pub fn all_equal(lst: Vec<u32>) -> bool {
 /// Basic usage:
 ///
 /// ```rust
-/// # use thirtyseconds::arrays::all_unique;
+/// # use dryip::arrays::all_unique;
 /// assert!(all_unique(vec![1, 2, 3]));
 /// ```
 pub fn all_unique(lst: Vec<u32>) -> bool {
@@ -43,7 +43,7 @@ pub fn all_unique(lst: Vec<u32>) -> bool {
 /// Basic usage:
 ///
 /// ```rust
-/// # use thirtyseconds::arrays::arithmetic_progression;
+/// # use dryip::arrays::arithmetic_progression;
 /// assert_eq!(vec![5, 10, 15, 20, 25], arithmetic_progression(5, 25));
 /// ```
 /// [Range]: https://doc.rust-lang.org/std/ops/struct.Range.html

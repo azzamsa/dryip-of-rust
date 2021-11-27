@@ -7,7 +7,7 @@
 /// Basic usage:
 ///
 /// ```rust
-/// # use thirtyseconds::maths::average;
+/// # use dryip::maths::average;
 /// assert_eq!(2.0, average(vec![1, 2, 3]));
 /// ```
 pub fn average(nums: Vec<u32>) -> f32 {
