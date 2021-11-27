@@ -1,9 +1,9 @@
 #![doc(
-    html_logo_url = "https://raw.githubusercontent.com/azzamsa/drip-of-rust/master/docs/drip.svg
+    html_logo_url = "https://raw.githubusercontent.com/azzamsa/dryip-of-rust/master/docs/drip.png
 "
 )]
 #![doc(
-    html_favicon_url = "https://raw.githubusercontent.com/azzamsa/drip-of-rust/master/docs/drip.svg
+    html_favicon_url = "https://raw.githubusercontent.com/azzamsa/dryip-of-rust/master/docs/drip.ico
 "
 )]
 
