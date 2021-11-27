@@ -4,7 +4,6 @@ env:
   MIN_SUPPORTED_RUST_VERSION: "1.56.1"
 
 on:
-  workflow_dispatch:
   pull_request:
   push:
     branches:
@@ -74,12 +73,6 @@ jobs:
         with:
           command: test
           args: --verbose
-
-      - uses: GoogleCloudPlatform/release-please-action@v2
-        with:
-           token: ${{ secrets.GH_TOKEN }}
-           release-type: rust
-           package-name: release-please-action
 
   build:
     name: ${{ matrix.job.os }} (${{ matrix.job.target }})
