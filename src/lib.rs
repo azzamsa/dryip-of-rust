@@ -7,9 +7,9 @@
 "
 )]
 
-//! # 30 Seconds of Rust 🦀
+//! # Dryip of Rust 🦀
 //!
-//! Hello, and welcome to the 30 Seconds of Rust 🦀 website! 👋
+//! Hello, and welcome to the Dryip of Rust 🦀 website! 👋
 //!
 //! - Each function categorized into appropriate module.
 //! - Use the search bar to find the function.
