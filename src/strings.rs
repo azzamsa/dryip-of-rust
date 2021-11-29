@@ -208,5 +208,10 @@ mod tests {
             println!("test input: {:?}", s);
             let _ = to_camelcase(&s);
         }
+        #[test]
+        fn strings_is_anagram(s in "\\PC*") {
+            println!("test input: {:?}", s);
+            let _ = is_anagram(&s, &s);
+        }
     }
 }
