@@ -1,3 +1,5 @@
+use crate::error::Error;
+
 /// Convert HEX into RGB value.
 ///
 /// - Convert string slice to integer using [from_str_radix].
@@ -63,6 +65,8 @@ pub fn capitalize_every_word(sentence: &str) -> String {
 
 /// Converts a string to camelcase.
 ///
+/// - Sanitize the input by removing leading and trailing whitespace, and replacing the required symbols.
+/// - Reject any invalid input.
 /// - Replace any - or _ with a space, using the `replace()`.
 /// - Use `enumerate()` to check for the first word.
 /// - Use [RangeFull] notation to get the first char uppercased and left the rest as is.
@@ -73,13 +77,24 @@ pub fn capitalize_every_word(sentence: &str) -> String {
 ///
 /// ```rust
 /// # use dryip::strings::to_camelcase;
-/// assert_eq!("fooBar", to_camelcase("foo bar"));
+/// assert_eq!(Ok("fooBar".to_string()), to_camelcase("foo bar"));
 /// ```
 /// [RangeFull]: https://doc.rust-lang.org/std/ops/struct.RangeFull.html
-pub fn to_camelcase(sentence: &str) -> String {
-    sentence
+pub fn to_camelcase(sentence: &str) -> Result<String, Error> {
+    // sanitize the input first before the length check.
+    // otherwise `-  ` will be valid input.
+    let sentence_ = sentence
         .replace("-", " ")
         .replace("_", " ")
+        .trim()
+        .to_string();
+    if !sentence_.is_ascii() {
+        return Err(Error::NotAscii(sentence_));
+    }
+    if sentence_.len() < 2 {
+        return Err(Error::InvalidWord(sentence_));
+    }
+    let result = sentence_
         .split(' ')
         .enumerate()
         .map(|(index, word)| {
@@ -89,7 +104,8 @@ pub fn to_camelcase(sentence: &str) -> String {
                 format!("{}{}", &word[..1].to_uppercase(), &word[1..])
             }
         })
-        .collect()
+        .collect();
+    Ok(result)
 }
 
 /// Checks if a string is an anagram of another string (case-insensitive, ignores spaces, punctuation and special characters).
@@ -121,6 +137,7 @@ pub fn is_anagram(sentence1: &str, sentence2: &str) -> bool {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use proptest::prelude::*;
 
     #[test]
     fn test_hex_to_rgb() {
@@ -143,18 +160,39 @@ mod tests {
     }
     #[test]
     fn test_to_camelcase() {
-        assert_eq!("fooBar", to_camelcase("foo bar"));
+        //from proptest
         assert_eq!(
-            "someDatabaseFieldName",
+            Error::NotAscii("Σ".to_string()),
+            to_camelcase("Σ").unwrap_err()
+        );
+        assert_eq!(
+            Error::NotAscii("ପ".to_string()),
+            to_camelcase("-ପ").unwrap_err()
+        );
+        assert_eq!(
+            Error::InvalidWord("a".to_string()),
+            to_camelcase("a ").unwrap_err()
+        );
+        assert_eq!(
+            Error::InvalidWord("".to_string()),
+            to_camelcase("-").unwrap_err()
+        );
+
+        assert_eq!(Ok("fooBar".to_string()), to_camelcase("foo bar"));
+        assert_eq!(
+            Ok("someDatabaseFieldName".to_string()),
             to_camelcase("some_database_field_name")
         );
         assert_eq!(
-            "someLabelThatNeedsToBeCamelized",
+            Ok("someLabelThatNeedsToBeCamelized".to_string()),
             to_camelcase("Some label that needs to be camelized")
         );
-        assert_eq!("someFooProperty", to_camelcase("some-foo-property"));
         assert_eq!(
-            "someMixedStringWithSpacesUnderscoresAndHyphens",
+            Ok("someFooProperty".to_string()),
+            to_camelcase("some-foo-property")
+        );
+        assert_eq!(
+            Ok("someMixedStringWithSpacesUnderscoresAndHyphens".to_string()),
             to_camelcase("some-mixed_string with spaces_underscores-and-hyphens")
         )
     }
@@ -163,5 +201,12 @@ mod tests {
         assert!(is_anagram("anagram", "Nag a ram"));
         assert!(is_anagram("iceman", "cinema"));
         assert!(!is_anagram("foo", "of"));
+    }
+    proptest! {
+        #[test]
+        fn strings_to_camelcase(s in "\\PC*") {
+            println!("test input: {:?}", s);
+            let _ = to_camelcase(&s);
+        }
     }
 }

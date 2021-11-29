@@ -10,6 +10,9 @@ readme = "README.md"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/azzamsa/dryip-of-rust"
 
+[dependencies]
+thiserror = "1.0.30"
+
 [dev-dependencies]
 proptest = "1.0.0"
 

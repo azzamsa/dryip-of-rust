@@ -17,6 +17,7 @@
 //!
 
 pub mod arrays;
+pub mod error;
 pub mod maths;
 pub mod strings;
 
