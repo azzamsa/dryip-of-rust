@@ -42,6 +42,8 @@ pub fn rgb_to_hex(r: i32, g: i32, b: i32) -> String {
 
 /// Capitalize every word.
 ///
+/// - Sanitize the input by removing leading and trailing whitespace.
+/// - Reject any invalid input.
 /// - Split the sentence by whitespace using `split()`.
 /// - Iterate through each word using `map()`.
 /// - Use [RangeFull] notation to get the first char uppercased and left the rest as is.
@@ -52,15 +54,23 @@ pub fn rgb_to_hex(r: i32, g: i32, b: i32) -> String {
 ///
 /// ```rust
 /// # use dryip::strings::capitalize_every_word;
-/// assert_eq!("Foo Bar", capitalize_every_word("foo bar"));
+/// assert_eq!(Ok("Foo Bar".to_string()), capitalize_every_word("foo bar"));
 /// ```
 /// [RangeFull]: https://doc.rust-lang.org/std/ops/struct.RangeFull.html
-pub fn capitalize_every_word(sentence: &str) -> String {
-    sentence
+pub fn capitalize_every_word(sentence: &str) -> Result<String, Error> {
+    let sentence_ = sentence.trim().to_string();
+    if !sentence_.is_ascii() {
+        return Err(Error::NotAscii(sentence_));
+    }
+    if sentence_.len() < 2 {
+        return Err(Error::InvalidWord(sentence_));
+    }
+    let result = sentence_
         .split(' ')
         .map(|word| format!("{}{}", &word[..1].to_uppercase(), &word[1..]))
         .collect::<Vec<_>>()
-        .join(" ")
+        .join(" ");
+    Ok(result)
 }
 
 /// Converts a string to camelcase.
@@ -151,12 +161,15 @@ mod tests {
     }
     #[test]
     fn test_capitalize_every_word() {
-        assert_eq!("Hello World!", capitalize_every_word("hello world!"));
         assert_eq!(
-            "The Quick Brown Fox Jumps",
+            Ok("Hello World!".to_string()),
+            capitalize_every_word("hello world!")
+        );
+        assert_eq!(
+            Ok("The Quick Brown Fox Jumps".to_string()),
             capitalize_every_word("The quick brown fox jumps")
         );
-        assert_eq!("Foo", capitalize_every_word("foo"));
+        assert_eq!(Ok("Foo".to_string()), capitalize_every_word("foo"));
     }
     #[test]
     fn test_to_camelcase() {
@@ -212,6 +225,11 @@ mod tests {
         fn strings_is_anagram(s in "\\PC*") {
             println!("test input: {:?}", s);
             let _ = is_anagram(&s, &s);
+        }
+        #[test]
+        fn strings_capitalize_every_word(s in "\\PC*") {
+            println!("test input: {:?}", s);
+            let _ = capitalize_every_word(&s);
         }
     }
 }
