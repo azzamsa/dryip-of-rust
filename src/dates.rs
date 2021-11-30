@@ -11,7 +11,9 @@ use time::{Date, Duration};
 /// ```rust
 /// # use dryip::dates::add_days;
 /// # use time::{ext::NumericalDuration, Date, Month, Duration};
-/// assert_eq!(Ok(Date::from_calendar_date(2019, Month::January, 2).unwrap()), add_days(1.days(),Date::from_calendar_date(2019, Month::January, 1).unwrap()));
+/// let current_date = Date::from_calendar_date(2019, Month::January, 1).unwrap();
+/// let target_date = Date::from_calendar_date(2019, Month::January, 2).unwrap();
+/// assert_eq!(Ok(target_date), add_days(1.days(), current_date));
 /// ```
 pub fn add_days(duration: Duration, date: Date) -> Result<Date, time::error::ComponentRange> {
     Ok(date + duration)
