@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.8] - 2021-11-30
+
+### Features
+
+- Add `add_days` (c79cd2d)
+
 ## [0.1.7] - 2021-11-27
 
 ### Features
