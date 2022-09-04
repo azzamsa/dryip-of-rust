@@ -2,15 +2,15 @@
 name = "dryip"
 version = "0.1.8"
 authors = ["azzamsa <me@azzamsa.com>"]
-description = "Short 🩸 Rust 🦀 code snippets for inspiration."
-edition = "2021"
-license = "MIT OR Apache-2.0"
-keywords = ["algorithms", "dryip"]
 categories = ["algorithms"]
+documentation = "https://docs.rs/dryip"
+edition = "2021"
+homepage = "https://github.com/azzamsa/dryip-of-rust"
+keywords = ["algorithms", "dryip"]
+license = "MIT OR Apache-2.0"
 readme = "README.md"
 repository = "https://github.com/azzamsa/dryip-of-rust"
-documentation = "https://docs.rs/dryip"
-homepage = "https://github.com/azzamsa/dryip-of-rust"
+description = "Short 🩸 Rust 🦀 code snippets for inspiration."
 
 [dependencies]
 thiserror = "1.0.30"

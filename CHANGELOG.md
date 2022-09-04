@@ -33,4 +33,3 @@ All notable changes to this project will be documented in this file.
 - Find_multiples (ec846a9)
 - Average (28d132b)
 - Capitalize every word (dc64add)
-
