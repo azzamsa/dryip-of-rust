@@ -13,7 +13,7 @@ repository = "https://github.com/azzamsa/dryip-of-rust"
 description = "Short 🩸 Rust 🦀 code snippets for inspiration."
 
 [dependencies]
-time = "0.3.5"
+time = "0.3.14"
 
 [dev-dependencies]
 # git hooks

@@ -1,7 +1,7 @@
 name: CI
 
 env:
-  MIN_SUPPORTED_RUST_VERSION: "1.56.1"
+  MIN_SUPPORTED_RUST_VERSION: "1.63.0"
 
 on:
   workflow_dispatch:
