@@ -1,5 +1,3 @@
-use crate::error::Error;
-
 /// Convert HEX into RGB value.
 ///
 /// - Convert string slice to integer using [from_str_radix].
@@ -42,8 +40,6 @@ pub fn rgb_to_hex(r: i32, g: i32, b: i32) -> String {
 
 /// Capitalize every word.
 ///
-/// - Sanitize the input by removing leading and trailing whitespace.
-/// - Reject any invalid input.
 /// - Split the sentence by whitespace using `split()`.
 /// - Iterate through each word using `map()`.
 /// - Use [RangeFull] notation to get the first char uppercased and left the rest as is.
@@ -54,29 +50,19 @@ pub fn rgb_to_hex(r: i32, g: i32, b: i32) -> String {
 ///
 /// ```rust
 /// # use dryip::strings::capitalize_every_word;
-/// assert_eq!(Ok("Foo Bar".to_string()), capitalize_every_word("foo bar"));
+/// assert_eq!("Foo Bar", capitalize_every_word("foo bar"));
 /// ```
 /// [RangeFull]: https://doc.rust-lang.org/std/ops/struct.RangeFull.html
-pub fn capitalize_every_word(sentence: &str) -> Result<String, Error> {
-    let sentence_ = sentence.trim().to_string();
-    if !sentence_.is_ascii() {
-        return Err(Error::NotAscii(sentence_));
-    }
-    if sentence_.len() < 2 {
-        return Err(Error::InvalidWord(sentence_));
-    }
-    let result = sentence_
+pub fn capitalize_every_word(sentence: &str) -> String {
+    sentence
         .split(' ')
         .map(|word| format!("{}{}", &word[..1].to_uppercase(), &word[1..]))
         .collect::<Vec<_>>()
-        .join(" ");
-    Ok(result)
+        .join(" ")
 }
 
 /// Converts a string to camelcase.
 ///
-/// - Sanitize the input by removing leading and trailing whitespace, and replacing the required symbols.
-/// - Reject any invalid input.
 /// - Replace any - or _ with a space, using the `replace()`.
 /// - Use `enumerate()` to check for the first word.
 /// - Use [RangeFull] notation to get the first char uppercased and left the rest as is.
@@ -87,24 +73,13 @@ pub fn capitalize_every_word(sentence: &str) -> Result<String, Error> {
 ///
 /// ```rust
 /// # use dryip::strings::to_camelcase;
-/// assert_eq!(Ok("fooBar".to_string()), to_camelcase("foo bar"));
+/// assert_eq!("fooBar", to_camelcase("foo bar"));
 /// ```
 /// [RangeFull]: https://doc.rust-lang.org/std/ops/struct.RangeFull.html
-pub fn to_camelcase(sentence: &str) -> Result<String, Error> {
-    // sanitize the input first before the length check.
-    // otherwise `-  ` will be valid input.
-    let sentence_ = sentence
+pub fn to_camelcase(sentence: &str) -> String {
+    sentence
         .replace("-", " ")
         .replace("_", " ")
-        .trim()
-        .to_string();
-    if !sentence_.is_ascii() {
-        return Err(Error::NotAscii(sentence_));
-    }
-    if sentence_.len() < 2 {
-        return Err(Error::InvalidWord(sentence_));
-    }
-    let result = sentence_
         .split(' ')
         .enumerate()
         .map(|(index, word)| {
@@ -114,8 +89,7 @@ pub fn to_camelcase(sentence: &str) -> Result<String, Error> {
                 format!("{}{}", &word[..1].to_uppercase(), &word[1..])
             }
         })
-        .collect();
-    Ok(result)
+        .collect()
 }
 
 /// Checks if a string is an anagram of another string (case-insensitive, ignores spaces, punctuation and special characters).
@@ -147,7 +121,6 @@ pub fn is_anagram(sentence1: &str, sentence2: &str) -> bool {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use proptest::prelude::*;
 
     #[test]
     fn test_hex_to_rgb() {
@@ -161,51 +134,27 @@ mod tests {
     }
     #[test]
     fn test_capitalize_every_word() {
+        assert_eq!("Hello World!", capitalize_every_word("hello world!"));
         assert_eq!(
-            Ok("Hello World!".to_string()),
-            capitalize_every_word("hello world!")
-        );
-        assert_eq!(
-            Ok("The Quick Brown Fox Jumps".to_string()),
+            "The Quick Brown Fox Jumps",
             capitalize_every_word("The quick brown fox jumps")
         );
-        assert_eq!(Ok("Foo".to_string()), capitalize_every_word("foo"));
+        assert_eq!("Foo", capitalize_every_word("foo"));
     }
     #[test]
     fn test_to_camelcase() {
-        //from proptest
+        assert_eq!("fooBar", to_camelcase("foo bar"));
         assert_eq!(
-            Error::NotAscii("Σ".to_string()),
-            to_camelcase("Σ").unwrap_err()
-        );
-        assert_eq!(
-            Error::NotAscii("ପ".to_string()),
-            to_camelcase("-ପ").unwrap_err()
-        );
-        assert_eq!(
-            Error::InvalidWord("a".to_string()),
-            to_camelcase("a ").unwrap_err()
-        );
-        assert_eq!(
-            Error::InvalidWord("".to_string()),
-            to_camelcase("-").unwrap_err()
-        );
-
-        assert_eq!(Ok("fooBar".to_string()), to_camelcase("foo bar"));
-        assert_eq!(
-            Ok("someDatabaseFieldName".to_string()),
+            "someDatabaseFieldName",
             to_camelcase("some_database_field_name")
         );
         assert_eq!(
-            Ok("someLabelThatNeedsToBeCamelized".to_string()),
+            "someLabelThatNeedsToBeCamelized",
             to_camelcase("Some label that needs to be camelized")
         );
+        assert_eq!("someFooProperty", to_camelcase("some-foo-property"));
         assert_eq!(
-            Ok("someFooProperty".to_string()),
-            to_camelcase("some-foo-property")
-        );
-        assert_eq!(
-            Ok("someMixedStringWithSpacesUnderscoresAndHyphens".to_string()),
+            "someMixedStringWithSpacesUnderscoresAndHyphens",
             to_camelcase("some-mixed_string with spaces_underscores-and-hyphens")
         )
     }
@@ -214,22 +163,5 @@ mod tests {
         assert!(is_anagram("anagram", "Nag a ram"));
         assert!(is_anagram("iceman", "cinema"));
         assert!(!is_anagram("foo", "of"));
-    }
-    proptest! {
-        #[test]
-        fn strings_to_camelcase(s in "\\PC*") {
-            println!("test input: {:?}", s);
-            let _ = to_camelcase(&s);
-        }
-        #[test]
-        fn strings_is_anagram(s in "\\PC*") {
-            println!("test input: {:?}", s);
-            let _ = is_anagram(&s, &s);
-        }
-        #[test]
-        fn strings_capitalize_every_word(s in "\\PC*") {
-            println!("test input: {:?}", s);
-            let _ = capitalize_every_word(&s);
-        }
     }
 }
