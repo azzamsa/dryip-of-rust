@@ -78,8 +78,8 @@ pub fn capitalize_every_word(sentence: &str) -> String {
 /// [RangeFull]: https://doc.rust-lang.org/std/ops/struct.RangeFull.html
 pub fn to_camelcase(sentence: &str) -> String {
     sentence
-        .replace("-", " ")
-        .replace("_", " ")
+        .replace('-', " ")
+        .replace('_', " ")
         .split(' ')
         .enumerate()
         .map(|(index, word)| {
@@ -108,8 +108,8 @@ pub fn to_camelcase(sentence: &str) -> String {
 /// assert!(is_anagram("iceman", "cinema"));
 /// ```
 pub fn is_anagram(sentence1: &str, sentence2: &str) -> bool {
-    let sentence1_ = sentence1.replace(" ", "").to_lowercase();
-    let sentence2_ = sentence2.replace(" ", "").to_lowercase();
+    let sentence1_ = sentence1.replace(' ', "").to_lowercase();
+    let sentence2_ = sentence2.replace(' ', "").to_lowercase();
 
     if sentence1_.len() != sentence2_.len() {
         false

@@ -34,7 +34,7 @@ mod tests {
         );
         assert_eq!(
             Ok(Date::from_calendar_date(2019, Month::January, 29).unwrap()),
-            add_days(-2.days(), current_date)
+            add_days(-(2.days()), current_date)
         );
     }
 }
