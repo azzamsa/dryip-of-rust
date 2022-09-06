@@ -3,16 +3,11 @@ name: CI
 env:
   MIN_SUPPORTED_RUST_VERSION: "1.63.0"
 
-on:
-  workflow_dispatch:
-  pull_request:
-  push:
-    branches:
-      - master
+on: [push, pull_request]
 
 jobs:
   code_quality:
-    name: Code quality
+    name: Code Quality
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout source code
@@ -50,8 +45,8 @@ jobs:
         run: make lint
 
 
-  min_version:
-    name: Minimum supported rust version
+  msrv:
+    name: Minimum Supported Rust Version
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout source code
