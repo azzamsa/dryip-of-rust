@@ -43,6 +43,23 @@ pub fn all_unique(lst: Vec<u32>) -> bool {
 ///
 /// The other option is `partition`. However it can't work with multiple input such the current case.
 /// See `bifurcate_by` for `partition_example`
+///
+/// # Examples
+///
+/// Basic usage:
+///
+/// ```rust
+/// # use dryip::arrays::bifurcate;
+///let result: Vec<Vec<&str>> = [["beep", "boop", "bar"].to_vec(), ["foo"].to_vec()].to_vec();
+///assert_eq!(
+///    result,
+///    bifurcate(
+///      ["beep", "boop", "foo", "bar"].to_vec(),
+///      [true, true, false, true].to_vec()
+///    )
+///);
+/// ```
+
 pub fn bifurcate(lst: Vec<&str>, filter: Vec<bool>) -> Vec<Vec<&str>> {
     let result1: Vec<&str> = lst
         .iter()
