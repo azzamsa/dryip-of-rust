@@ -19,10 +19,10 @@ if [ -n "$1" ]; then
     # format newly added changelog file
     make fmt
 
-    git add -A && git commit -m "$1"
+    git add --all && git commit --message="$1"
     git show
-    git tag -s -a "$1" -m "$1" -m "For details, see the CHANGELOG.md"
-    git tag -v "$1"
+    git tag --sign --annotate "$1" --message="$1" --message="For details, see the CHANGELOG.md"
+    git tag --verify "$1"
 else
     echo "warn: Please provide a tag"
     exit 1
