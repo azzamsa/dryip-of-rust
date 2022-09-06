@@ -33,6 +33,33 @@ pub fn all_unique(lst: Vec<u32>) -> bool {
     lst.len() == lst.into_iter().collect::<HashSet<u32>>().len()
 }
 
+/// Splits values into two groups.
+///
+/// If an element in `filter` is `True`, the corresponding element in the collection belongs to the first group.
+/// Otherwise, it belongs to the second group.
+///
+/// There are two options to use here. The first is using `enumerate()` and the second is `zip()`.
+/// Both should have similar code.
+///
+/// The other option is `partition`. However it can't work with multiple input such the current case.
+pub fn bifurcate(lst: Vec<&str>, filter: Vec<bool>) -> Vec<Vec<&str>> {
+    let result1: Vec<&str> = lst
+        .iter()
+        .zip(&filter)
+        .filter(|(_, lst2)| **lst2)
+        .map(|(lst1, _)| *lst1)
+        .collect();
+
+    let result2: Vec<&str> = lst
+        .iter()
+        .zip(&filter)
+        .filter(|(_, lst2)| !**lst2)
+        .map(|(lst1, _)| *lst1)
+        .collect();
+
+    [result1, result2].to_vec()
+}
+
 /// Returns a list of numbers in the arithmetic progression starting with the
 /// given positive integer and up to the specified limit.
 ///
@@ -64,6 +91,17 @@ mod tests {
     fn test_all_unique() {
         assert!(all_unique(vec![1, 2, 3, 4, 5, 6]));
         assert!(!all_unique(vec![1, 2, 2, 3, 4, 5]));
+    }
+    #[test]
+    fn test_bifurcate() {
+        let result: Vec<Vec<&str>> = [["beep", "boop", "bar"].to_vec(), ["foo"].to_vec()].to_vec();
+        assert_eq!(
+            result,
+            bifurcate(
+                ["beep", "boop", "foo", "bar"].to_vec(),
+                [true, true, false, true].to_vec()
+            )
+        );
     }
     #[test]
     fn test_arithmetic_progression() {
