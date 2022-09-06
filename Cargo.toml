@@ -1,6 +1,6 @@
 [package]
 name = "dryip"
-version = "0.1.8"
+version = "0.2.0"
 authors = ["azzamsa <me@azzamsa.com>"]
 categories = ["algorithms"]
 documentation = "https://docs.rs/dryip"
