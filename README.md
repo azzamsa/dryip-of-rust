@@ -1,8 +1,8 @@
 <div align="center">
 <h1>Dryip of Rust</h1>
-<img src='docs/drip.svg' width=80px/>
+<img src='docs/logo.svg' width=80px/>
 
-Short Rust 🦀 code snippets for inspiration.
+Short Rust 🦀 code snippets for inspiration 💦.
 
 <a href="https://github.com/azzamsa/dryip-of-rust/workflows/ci.yml">
     <img src="https://github.com/azzamsa/dryip-of-rust/workflows/ci/badge.svg" alt="Build status" />
@@ -23,4 +23,4 @@ Short Rust 🦀 code snippets for inspiration.
 ## Credits
 
 - [30-seconds-of-code](https://github.com/30-seconds/30-seconds-of-code)
-- Drop water by BomSymbols from the Noun Project
+- Icons and emoji from [Noto Emoji](https://github.com/googlefonts/noto-emoji)
