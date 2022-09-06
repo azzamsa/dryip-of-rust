@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.0] - 2022-09-06
+
+### Features
+
+- `bifurcate_by` ([316fd79](316fd79e89f3759083a1bb2c5f797727b0e9bf91))
+
 ## [0.2.0] - 2022-09-06
 
 ### Features
