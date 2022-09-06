@@ -42,6 +42,7 @@ pub fn all_unique(lst: Vec<u32>) -> bool {
 /// Both should have similar code.
 ///
 /// The other option is `partition`. However it can't work with multiple input such the current case.
+/// See `bifurcate_by` for `partition_example`
 pub fn bifurcate(lst: Vec<&str>, filter: Vec<bool>) -> Vec<Vec<&str>> {
     let result1: Vec<&str> = lst
         .iter()
@@ -58,6 +59,36 @@ pub fn bifurcate(lst: Vec<&str>, filter: Vec<bool>) -> Vec<Vec<&str>> {
         .collect();
 
     [result1, result2].to_vec()
+}
+
+/// Splits values into two groups according to a passed function.
+///
+/// Which specifies which group an element in the input list belongs to.
+/// If the function returns True, the element belongs to the first group; otherwise, it belongs to the second group.
+///
+/// Use list comprehension to add elements to groups, based on fn.
+///
+/// # Examples
+///
+/// Basic usage:
+///
+/// ```rust
+/// # use dryip::arrays::bifurcate_by;
+///fn starts_with(item: &str) -> bool {
+///      item.starts_with('b')
+///}
+///
+///let result: Vec<Vec<&str>> = [["beep", "boop", "bar"].to_vec(), ["foo"].to_vec()].to_vec();
+///assert_eq!(
+///    result,
+///    bifurcate_by(["beep", "boop", "foo", "bar"].to_vec(), &starts_with)
+///);
+/// ```
+
+pub fn bifurcate_by<'a>(lst: Vec<&'a str>, f: &'a dyn Fn(&str) -> bool) -> Vec<Vec<&'a str>> {
+    let (result, result1): (Vec<&str>, Vec<&str>) = lst.iter().partition(|item| f(item));
+
+    [result, result1].to_vec()
 }
 
 /// Returns a list of numbers in the arithmetic progression starting with the
@@ -101,6 +132,18 @@ mod tests {
                 ["beep", "boop", "foo", "bar"].to_vec(),
                 [true, true, false, true].to_vec()
             )
+        );
+    }
+    #[test]
+    fn test_bifurcate_by() {
+        fn starts_with(item: &str) -> bool {
+            item.starts_with('b')
+        }
+
+        let result: Vec<Vec<&str>> = [["beep", "boop", "bar"].to_vec(), ["foo"].to_vec()].to_vec();
+        assert_eq!(
+            result,
+            bifurcate_by(["beep", "boop", "foo", "bar"].to_vec(), &starts_with)
         );
     }
     #[test]
