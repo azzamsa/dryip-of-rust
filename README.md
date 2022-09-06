@@ -20,14 +20,23 @@ Short Rust 🦀 code snippets for inspiration 💦.
 - Visit [the website](https://docs.rs/dryip/) to view the snippets.
 - Click the `[SRC]` button at the top to see the complete source code.
 
-# Contribute
+## Contribute
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 - I :heart: pull requests and bug reports!
-- Don't hesitate to [tell me my Rust-fu sucks](https://github.com/azzamsa/dryip-of-rust/issues/new), but please tell me why.
+- Don't hesitate to [tell me my Rust-fu sucks][new-issue], but please tell me why.
 
 ## Credits
 
-- [30-seconds-of-code](https://github.com/30-seconds/30-seconds-of-code) [CC-BY-4.0 license]
-- Icons and emoji from [Noto Emoji](https://github.com/googlefonts/noto-emoji) [Apache-2.0 license]
+- [30-seconds-of-code][30-seconds] [CC-BY-4.0 license]
+- Icons and emoji from [Noto Emoji][noto-emoji]. [Apache-2.0 license]
+
+<!-- dprint-ignore-start -->
+
+[new-issue]: https://github.com/azzamsa/dryip-of-rust/issues/new
+
+[30-seconds]: https://github.com/30-seconds/30-seconds-of-code
+[noto-emoji]: https://github.com/googlefonts/noto-emoji
+
+<!-- dprint-ignore-end -->
