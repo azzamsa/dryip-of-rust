@@ -25,17 +25,14 @@ fmt_check: ## Check is the codebase properly formatted.
 	dprint check --config configs/dprint.json
 
 lint: ## Lint the codebase.
-	cargo clippy --all-targets --all-features
-
-doc_check: ## Check the documentation.
-	cargo doc --all-features --no-deps
+	cargo clippy
 
 test: ## Test the codebase.
-	cargo test --all-targets
+	cargo test
 
 comply: fmt lint test ## Tasks to make the code-base comply with the rules. Mostly used in git hooks.
 
-check: fmt_check lint test doc_check ## Check if the repository comply with the rules and ready to be pushed.
+check: fmt_check lint test ## Check if the repository comply with the rules and ready to be pushed.
 
 release: ## Create a new release. Example `make release version=v2.2.0`
 	bash scripts/release.sh $(version)
