@@ -27,7 +27,7 @@ Short Rust 🦀 code snippets for inspiration 💦.
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-- I :heart: pull requests and bug reports!
+- I ❤️ pull requests and bug reports!
 - Don't hesitate to [tell me my Rust-fu sucks][new-issue], but please tell me why.
 
 ## Credits
