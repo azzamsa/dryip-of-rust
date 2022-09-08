@@ -108,6 +108,29 @@ pub fn bifurcate_by<'a>(lst: Vec<&'a str>, f: &'a dyn Fn(&str) -> bool) -> Vec<V
     [result, result1].to_vec()
 }
 
+/// Chunks a list into smaller lists of a specified size.
+///
+/// Rust `slice` has built-in `chucks()` function.
+/// But it returns a slice. So you need to iterate the slice and convert
+/// them into a vector.
+///
+/// # Examples
+///
+/// Basic usage:
+///
+/// ```rust
+/// # use dryip::arrays::chunk;
+///let input = vec![1, 2, 3, 4, 5];
+///let expected = vec![vec![1, 2], vec![3, 4], vec![5]];
+///assert_eq!(expected, chunk(input, 2));
+/// ```
+pub fn chunk(lst: Vec<i32>, size: usize) -> Vec<Vec<i32>> {
+    lst.chunks(size)
+        .into_iter()
+        .map(|item| item.to_vec())
+        .collect()
+}
+
 /// Returns a list of numbers in the arithmetic progression starting with the
 /// given positive integer and up to the specified limit.
 ///
@@ -162,6 +185,20 @@ mod tests {
             result,
             bifurcate_by(["beep", "boop", "foo", "bar"].to_vec(), &starts_with)
         );
+    }
+    #[test]
+    fn test_chunk() {
+        let input = vec![1, 2, 3, 4, 5];
+        let expected = vec![vec![1, 2], vec![3, 4], vec![5]];
+        assert_eq!(expected, chunk(input, 2));
+
+        let input = vec![1, 2, 3, 4, 5];
+        let expected = vec![vec![1], vec![2], vec![3], vec![4], vec![5]];
+        assert_eq!(expected, chunk(input, 1));
+
+        let input = vec![1, 2, 3, 4, 5];
+        let expected = vec![vec![1, 2, 3, 4, 5]];
+        assert_eq!(expected, chunk(input, 5));
     }
     #[test]
     fn test_arithmetic_progression() {
