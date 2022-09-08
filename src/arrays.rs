@@ -165,13 +165,12 @@ mod tests {
     }
     #[test]
     fn test_bifurcate() {
-        let expected: Vec<Vec<&str>> =
-            [["beep", "boop", "bar"].to_vec(), ["foo"].to_vec()].to_vec();
+        let expected: Vec<Vec<&str>> = vec![vec!["beep", "boop", "bar"], vec!["foo"]];
         assert_eq!(
             expected,
             bifurcate(
-                ["beep", "boop", "foo", "bar"].to_vec(),
-                [true, true, false, true].to_vec()
+                vec!["beep", "boop", "foo", "bar"],
+                vec![true, true, false, true]
             )
         );
     }
@@ -181,11 +180,10 @@ mod tests {
             item.starts_with('b')
         }
 
-        let expected: Vec<Vec<&str>> =
-            [["beep", "boop", "bar"].to_vec(), ["foo"].to_vec()].to_vec();
+        let expected: Vec<Vec<&str>> = vec![vec!["beep", "boop", "bar"], vec!["foo"]];
         assert_eq!(
             expected,
-            bifurcate_by(["beep", "boop", "foo", "bar"].to_vec(), &starts_with)
+            bifurcate_by(vec!["beep", "boop", "foo", "bar"], &starts_with)
         );
     }
     #[test]
