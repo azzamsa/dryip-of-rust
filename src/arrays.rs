@@ -50,9 +50,9 @@ pub fn all_unique(lst: Vec<u32>) -> bool {
 ///
 /// ```rust
 /// # use dryip::arrays::bifurcate;
-///let result: Vec<Vec<&str>> = [["beep", "boop", "bar"].to_vec(), ["foo"].to_vec()].to_vec();
+///let expected: Vec<Vec<&str>> = [["beep", "boop", "bar"].to_vec(), ["foo"].to_vec()].to_vec();
 ///assert_eq!(
-///    result,
+///    expected,
 ///    bifurcate(
 ///      ["beep", "boop", "foo", "bar"].to_vec(),
 ///      [true, true, false, true].to_vec()
@@ -95,9 +95,9 @@ pub fn bifurcate(lst: Vec<&str>, filter: Vec<bool>) -> Vec<Vec<&str>> {
 ///      item.starts_with('b')
 ///}
 ///
-///let result: Vec<Vec<&str>> = [["beep", "boop", "bar"].to_vec(), ["foo"].to_vec()].to_vec();
+///let expected: Vec<Vec<&str>> = [["beep", "boop", "bar"].to_vec(), ["foo"].to_vec()].to_vec();
 ///assert_eq!(
-///    result,
+///    expected,
 ///    bifurcate_by(["beep", "boop", "foo", "bar"].to_vec(), &starts_with)
 ///);
 /// ```
@@ -165,9 +165,10 @@ mod tests {
     }
     #[test]
     fn test_bifurcate() {
-        let result: Vec<Vec<&str>> = [["beep", "boop", "bar"].to_vec(), ["foo"].to_vec()].to_vec();
+        let expected: Vec<Vec<&str>> =
+            [["beep", "boop", "bar"].to_vec(), ["foo"].to_vec()].to_vec();
         assert_eq!(
-            result,
+            expected,
             bifurcate(
                 ["beep", "boop", "foo", "bar"].to_vec(),
                 [true, true, false, true].to_vec()
@@ -180,9 +181,10 @@ mod tests {
             item.starts_with('b')
         }
 
-        let result: Vec<Vec<&str>> = [["beep", "boop", "bar"].to_vec(), ["foo"].to_vec()].to_vec();
+        let expected: Vec<Vec<&str>> =
+            [["beep", "boop", "bar"].to_vec(), ["foo"].to_vec()].to_vec();
         assert_eq!(
-            result,
+            expected,
             bifurcate_by(["beep", "boop", "foo", "bar"].to_vec(), &starts_with)
         );
     }
