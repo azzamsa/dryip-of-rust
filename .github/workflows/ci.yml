@@ -61,6 +61,9 @@ jobs:
           default: true
           profile: minimal
 
+      - name: Install latest nextest release
+        uses: taiki-e/install-action@nextest
+
       - name: Cache
         uses: Swatinem/rust-cache@v1
 

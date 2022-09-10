@@ -6,6 +6,7 @@ help: # https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
 
 setup: ## Setup the repository.
 	git cliff --version || cargo install git-cliff
+	cargo nextest --version || cargo install --locked cargo-nextest
 	cargo-set-version --help || cargo install cargo-edit
 	cargo watch --version || cargo install cargo-watch
 	cargo outdated --version || cargo install --locked cargo-outdated
@@ -28,7 +29,8 @@ lint: ## Lint the codebase.
 	cargo clippy
 
 test: ## Test the codebase.
-	cargo test
+	cargo test --doc
+	cargo nextest run
 
 comply: fmt lint test ## Tasks to make the code-base comply with the rules. Mostly used in git hooks.
 
