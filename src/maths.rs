@@ -1,4 +1,4 @@
-#[allow(clippy::cast_possible_wrap, clippy::cast_possible_truncation)]
+#![allow(clippy::cast_possible_wrap, clippy::cast_possible_truncation)]
 
 /// Calculate the average of two or more numbers.
 ///

@@ -1,4 +1,4 @@
-#![warn(clippy::pedantic)]
+#![warn(clippy::pedantic, clippy::nursery)]
 #![doc(
     html_logo_url = "https://raw.githubusercontent.com/azzamsa/dryip-of-rust/master/docs/logo.png
 "
