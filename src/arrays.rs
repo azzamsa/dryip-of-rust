@@ -133,6 +133,26 @@ pub fn chunk(lst: &[i32], size: usize) -> Vec<Vec<i32>> {
     lst.chunks(size).into_iter().map(<[i32]>::to_vec).collect()
 }
 
+/// Removes falsey values from a list.
+///
+/// We have `Option` type in Rust. This is the recomended type to use
+/// in this case.
+///
+/// # Examples
+///
+/// Basic usage:
+///
+/// ```rust
+/// # use dryip::arrays::compact;
+///let input = vec![None, Some(1), None, None];
+///let expected = vec![Some(1)];
+///assert_eq!(expected, compact(input));
+/// ```
+#[must_use]
+pub fn compact(lst: Vec<Option<i32>>) -> Vec<Option<i32>> {
+    lst.into_iter().filter(<Option<i32>>::is_some).collect()
+}
+
 /// Returns a list of numbers in the arithmetic progression starting with the
 /// given positive integer and up to the specified limit.
 ///
@@ -202,6 +222,12 @@ mod tests {
         let input = vec![1, 2, 3, 4, 5];
         let expected = vec![vec![1, 2, 3, 4, 5]];
         assert_eq!(expected, chunk(&input, 5));
+    }
+    #[test]
+    fn test_compact() {
+        let input = vec![None, Some(1), None, None];
+        let expected = vec![Some(1)];
+        assert_eq!(expected, compact(input));
     }
     #[test]
     fn test_arithmetic_progression() {
