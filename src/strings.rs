@@ -1,6 +1,8 @@
+use std::num::ParseIntError;
+
 /// Convert HEX into RGB value.
 ///
-/// - Convert string slice to integer using [from_str_radix].
+/// - Convert string slice to integer using [`from_str_radix`].
 /// - Iterate through fixed index for the hex input.
 /// - Put the result into a vector.
 ///
@@ -10,20 +12,28 @@
 ///
 /// ```rust
 /// # use dryip::strings::hex_to_rgb;
-/// assert_eq!(vec![255, 165, 1], hex_to_rgb("FFA501"));
+/// assert_eq!(Ok(vec![255, 165, 1]), hex_to_rgb("FFA501"));
 /// ```
-/// [from_str_radix]: https://doc.rust-lang.org/std/primitive.i64.html#method.from_str_radix
-pub fn hex_to_rgb(hex: &str) -> Vec<i64> {
-    let to_base16 = |x| i64::from_str_radix(x, 16);
+/// [from_str_radix]: https://doc.rust-lang.org/std/primitive.i32.html#method.from_str_radix
+///
+/// # Errors
+///
+/// Will return `ParseIntError` if the function fails to convert str input into a radix
+/// equivalent.
+pub fn hex_to_rgb(hex: &str) -> Result<Vec<i32>, ParseIntError> {
+    fn to_base16(x: &str) -> Result<i32, ParseIntError> {
+        i32::from_str_radix(x, 16)
+    }
+
     [0, 2, 4]
         .iter()
-        .map(|&x| to_base16(&hex[x..x + 2]).unwrap())
-        .collect::<Vec<_>>()
+        .map(|&x| to_base16(&hex[x..x + 2]))
+        .collect()
 }
 
 /// Convert RGB into HEX value.
 ///
-/// Use [UpperHex] to format the string.
+/// Use [`UpperHex`] to format the string.
 ///
 /// # Examples
 ///
@@ -34,6 +44,7 @@ pub fn hex_to_rgb(hex: &str) -> Vec<i64> {
 /// assert_eq!("FFA501", rgb_to_hex(255, 165, 1));
 /// ```
 /// [UpperHex]: https://doc.rust-lang.org/std/fmt/trait.UpperHex.html
+#[must_use]
 pub fn rgb_to_hex(r: i32, g: i32, b: i32) -> String {
     format!("{:02X}{:02X}{:02X}", r, g, b)
 }
@@ -42,7 +53,7 @@ pub fn rgb_to_hex(r: i32, g: i32, b: i32) -> String {
 ///
 /// - Split the sentence by whitespace using `split()`.
 /// - Iterate through each word using `map()`.
-/// - Use [RangeFull] notation to get the first char uppercased and left the rest as is.
+/// - Use [`RangeFull`] notation to get the first char uppercased and left the rest as is.
 ///
 /// # Examples
 ///
@@ -53,6 +64,7 @@ pub fn rgb_to_hex(r: i32, g: i32, b: i32) -> String {
 /// assert_eq!("Foo Bar", capitalize_every_word("foo bar"));
 /// ```
 /// [RangeFull]: https://doc.rust-lang.org/std/ops/struct.RangeFull.html
+#[must_use]
 pub fn capitalize_every_word(sentence: &str) -> String {
     sentence
         .split(' ')
@@ -65,7 +77,7 @@ pub fn capitalize_every_word(sentence: &str) -> String {
 ///
 /// - Replace any - or _ with a space, using the `replace()`.
 /// - Use `enumerate()` to check for the first word.
-/// - Use [RangeFull] notation to get the first char uppercased and left the rest as is.
+/// - Use [`RangeFull`] notation to get the first char uppercased and left the rest as is.
 ///
 /// # Examples
 ///
@@ -76,6 +88,7 @@ pub fn capitalize_every_word(sentence: &str) -> String {
 /// assert_eq!("fooBar", to_camelcase("foo bar"));
 /// ```
 /// [RangeFull]: https://doc.rust-lang.org/std/ops/struct.RangeFull.html
+#[must_use]
 pub fn to_camelcase(sentence: &str) -> String {
     sentence
         .replace('-', " ")
@@ -107,15 +120,16 @@ pub fn to_camelcase(sentence: &str) -> String {
 /// # use dryip::strings::is_anagram;
 /// assert!(is_anagram("iceman", "cinema"));
 /// ```
+#[must_use]
 pub fn is_anagram(sentence1: &str, sentence2: &str) -> bool {
-    let sentence1_ = sentence1.replace(' ', "").to_lowercase();
-    let sentence2_ = sentence2.replace(' ', "").to_lowercase();
+    let sentence1 = sentence1.replace(' ', "").to_lowercase();
+    let sentence2 = sentence2.replace(' ', "").to_lowercase();
 
-    if sentence1_.len() != sentence2_.len() {
-        false
-    } else {
-        crate::sorted(&sentence1_) == crate::sorted(&sentence2_)
+    if sentence1.len() != sentence2.len() {
+        return false;
     }
+
+    crate::sorted(&sentence1) == crate::sorted(&sentence2)
 }
 
 #[cfg(test)]
@@ -124,13 +138,13 @@ mod tests {
 
     #[test]
     fn test_hex_to_rgb() {
-        assert_eq!(vec![255, 165, 1], hex_to_rgb("FFA501"));
-        assert_eq!(vec![192, 192, 192], hex_to_rgb("C0C0C0"));
+        assert_eq!(Ok(vec![255, 165, 1]), hex_to_rgb("FFA501"));
+        assert_eq!(Ok(vec![192, 192, 192]), hex_to_rgb("C0C0C0"));
     }
     #[test]
     fn test_rgb_to_hex() {
         assert_eq!("FFA501", rgb_to_hex(255, 165, 1));
-        assert_eq!(hex_to_rgb("C0C0C0"), vec![192, 192, 192]);
+        assert_eq!("C0C0C0", rgb_to_hex(192, 192, 192));
     }
     #[test]
     fn test_capitalize_every_word() {
@@ -156,7 +170,7 @@ mod tests {
         assert_eq!(
             "someMixedStringWithSpacesUnderscoresAndHyphens",
             to_camelcase("some-mixed_string with spaces_underscores-and-hyphens")
-        )
+        );
     }
     #[test]
     fn test_is_anagram() {

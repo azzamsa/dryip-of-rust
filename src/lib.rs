@@ -1,3 +1,4 @@
+#![warn(clippy::pedantic)]
 #![doc(
     html_logo_url = "https://raw.githubusercontent.com/azzamsa/dryip-of-rust/master/docs/logo.png
 "
@@ -21,6 +22,7 @@ pub mod dates;
 pub mod maths;
 pub mod strings;
 
+#[must_use]
 pub fn sorted(word: &str) -> String {
     let mut chars_ = word.chars().collect::<Vec<char>>();
     // Rust currently doesn't have non-mutating sort function

@@ -1,3 +1,5 @@
+#![allow(clippy::cast_sign_loss)]
+
 use std::collections::HashSet;
 
 /// Check if all value in given list are equal.
@@ -12,6 +14,7 @@ use std::collections::HashSet;
 /// # use dryip::arrays::all_equal;
 /// assert!(all_equal(vec![2, 2, 2]));
 /// ```
+#[must_use]
 pub fn all_equal(lst: Vec<u32>) -> bool {
     lst.into_iter().collect::<HashSet<u32>>().len() == 1
 }
@@ -29,6 +32,7 @@ pub fn all_equal(lst: Vec<u32>) -> bool {
 /// # use dryip::arrays::all_unique;
 /// assert!(all_unique(vec![1, 2, 3]));
 /// ```
+#[must_use]
 pub fn all_unique(lst: Vec<u32>) -> bool {
     lst.len() == lst.into_iter().collect::<HashSet<u32>>().len()
 }
@@ -54,23 +58,23 @@ pub fn all_unique(lst: Vec<u32>) -> bool {
 ///assert_eq!(
 ///    expected,
 ///    bifurcate(
-///      ["beep", "boop", "foo", "bar"].to_vec(),
-///      [true, true, false, true].to_vec()
+///      &["beep", "boop", "foo", "bar"].to_vec(),
+///      &[true, true, false, true].to_vec()
 ///    )
 ///);
 /// ```
-
-pub fn bifurcate(lst: Vec<&str>, filter: Vec<bool>) -> Vec<Vec<&str>> {
+#[must_use]
+pub fn bifurcate<'a>(lst: &'a [&str], filter: &'a [bool]) -> Vec<Vec<&'a str>> {
     let result1: Vec<&str> = lst
         .iter()
-        .zip(&filter)
+        .zip(filter)
         .filter(|(_, lst2)| **lst2)
         .map(|(lst1, _)| *lst1)
         .collect();
 
     let result2: Vec<&str> = lst
         .iter()
-        .zip(&filter)
+        .zip(filter)
         .filter(|(_, lst2)| !**lst2)
         .map(|(lst1, _)| *lst1)
         .collect();
@@ -98,11 +102,11 @@ pub fn bifurcate(lst: Vec<&str>, filter: Vec<bool>) -> Vec<Vec<&str>> {
 ///let expected: Vec<Vec<&str>> = [["beep", "boop", "bar"].to_vec(), ["foo"].to_vec()].to_vec();
 ///assert_eq!(
 ///    expected,
-///    bifurcate_by(["beep", "boop", "foo", "bar"].to_vec(), &starts_with)
+///    bifurcate_by(&["beep", "boop", "foo", "bar"].to_vec(), &starts_with)
 ///);
 /// ```
-
-pub fn bifurcate_by<'a>(lst: Vec<&'a str>, f: &'a dyn Fn(&str) -> bool) -> Vec<Vec<&'a str>> {
+#[must_use]
+pub fn bifurcate_by<'a>(lst: &[&'a str], f: &'a dyn Fn(&str) -> bool) -> Vec<Vec<&'a str>> {
     let (result, result1): (Vec<&str>, Vec<&str>) = lst.iter().partition(|item| f(item));
 
     [result, result1].to_vec()
@@ -122,13 +126,11 @@ pub fn bifurcate_by<'a>(lst: Vec<&'a str>, f: &'a dyn Fn(&str) -> bool) -> Vec<V
 /// # use dryip::arrays::chunk;
 ///let input = vec![1, 2, 3, 4, 5];
 ///let expected = vec![vec![1, 2], vec![3, 4], vec![5]];
-///assert_eq!(expected, chunk(input, 2));
+///assert_eq!(expected, chunk(&input, 2));
 /// ```
-pub fn chunk(lst: Vec<i32>, size: usize) -> Vec<Vec<i32>> {
-    lst.chunks(size)
-        .into_iter()
-        .map(|item| item.to_vec())
-        .collect()
+#[must_use]
+pub fn chunk(lst: &[i32], size: usize) -> Vec<Vec<i32>> {
+    lst.chunks(size).into_iter().map(<[i32]>::to_vec).collect()
 }
 
 /// Returns a list of numbers in the arithmetic progression starting with the
@@ -142,9 +144,10 @@ pub fn chunk(lst: Vec<i32>, size: usize) -> Vec<Vec<i32>> {
 ///
 /// ```rust
 /// # use dryip::arrays::arithmetic_progression;
-/// assert_eq!(vec![5, 10, 15, 20, 25], arithmetic_progression(5, 25));
+/// assert_eq!([5, 10, 15, 20, 25].to_vec(), arithmetic_progression(5, 25));
 /// ```
 /// [Range]: https://doc.rust-lang.org/std/ops/struct.Range.html
+#[must_use]
 pub fn arithmetic_progression(n: i32, lim: i32) -> Vec<i32> {
     (n..=lim).step_by(n as usize).collect::<Vec<i32>>()
 }
@@ -169,8 +172,8 @@ mod tests {
         assert_eq!(
             expected,
             bifurcate(
-                vec!["beep", "boop", "foo", "bar"],
-                vec![true, true, false, true]
+                ["beep", "boop", "foo", "bar"].as_ref(),
+                [true, true, false, true].as_ref()
             )
         );
     }
@@ -183,22 +186,22 @@ mod tests {
         let expected: Vec<Vec<&str>> = vec![vec!["beep", "boop", "bar"], vec!["foo"]];
         assert_eq!(
             expected,
-            bifurcate_by(vec!["beep", "boop", "foo", "bar"], &starts_with)
+            bifurcate_by(["beep", "boop", "foo", "bar"].as_ref(), &starts_with)
         );
     }
     #[test]
     fn test_chunk() {
         let input = vec![1, 2, 3, 4, 5];
         let expected = vec![vec![1, 2], vec![3, 4], vec![5]];
-        assert_eq!(expected, chunk(input, 2));
+        assert_eq!(expected, chunk(&input, 2));
 
         let input = vec![1, 2, 3, 4, 5];
         let expected = vec![vec![1], vec![2], vec![3], vec![4], vec![5]];
-        assert_eq!(expected, chunk(input, 1));
+        assert_eq!(expected, chunk(&input, 1));
 
         let input = vec![1, 2, 3, 4, 5];
         let expected = vec![vec![1, 2, 3, 4, 5]];
-        assert_eq!(expected, chunk(input, 5));
+        assert_eq!(expected, chunk(&input, 5));
     }
     #[test]
     fn test_arithmetic_progression() {

@@ -15,6 +15,9 @@ use time::{Date, Duration};
 /// let target_date = Date::from_calendar_date(2019, Month::January, 2).unwrap();
 /// assert_eq!(Ok(target_date), add_days(1.days(), current_date));
 /// ```
+/// # Errors
+///
+/// Will return `time::error::ComponentRange` if the addition operations fails.
 pub fn add_days(duration: Duration, date: Date) -> Result<Date, time::error::ComponentRange> {
     Ok(date + duration)
 }
