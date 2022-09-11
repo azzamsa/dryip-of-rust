@@ -25,7 +25,10 @@ fmt_check: ## Check is the codebase properly formatted.
 	cargo fmt --all -- --check
 	dprint check --config configs/dprint.json
 
-lint: ## Lint the codebase.
+lint_doc: ## Lint the docstring.
+	cargo doc --all-features --no-deps
+
+lint: lint_doc ## Lint the codebase.
 	cargo clippy
 
 test: ## Test the codebase.
