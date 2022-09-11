@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.0] - 2022-09-11
+
+### Features
+
+- Removes `None` values from a list ([5f8faf4](5f8faf44e403935280c370a94829715054888d0e))
+- Chunks a list into smaller lists of a specified size. ([724dea0](724dea073b7e5fc74a8498a2af3fc517114437ad))
+
 ## [0.3.0] - 2022-09-06
 
 ### Features
