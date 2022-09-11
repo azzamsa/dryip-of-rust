@@ -5,14 +5,14 @@ help: # https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 setup: ## Setup the repository.
-	git cliff --version || cargo install git-cliff
+	git cliff --version || cargo install --locked git-cliff
 	cargo nextest --version || cargo install --locked cargo-nextest
-	cargo-set-version --help || cargo install cargo-edit
-	cargo watch --version || cargo install cargo-watch
+	cargo-set-version --help || cargo install --locked cargo-edit
+	cargo watch --version || cargo install --locked cargo-watch
 	cargo outdated --version || cargo install --locked cargo-outdated
 	cargo tarpaulin --version || cargo install --locked cargo-tarpaulin
 	cargo udeps --version || cargo install --locked cargo-udeps
-	dprint --version || cargo install dprint
+	dprint --version || cargo install --locked dprint
 
 dev: # Develop the app.
 	cargo watch -x clippy
