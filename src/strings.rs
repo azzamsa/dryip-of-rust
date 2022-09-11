@@ -2,7 +2,7 @@ use std::num::ParseIntError;
 
 /// Convert HEX into RGB value.
 ///
-/// - Convert string slice to integer using [`from_str_radix`].
+/// - Convert string slice to integer using [from_str_radix](https://doc.rust-lang.org/std/primitive.i32.html#method.from_str_radix).
 /// - Iterate through fixed index for the hex input.
 /// - Put the result into a vector.
 ///
@@ -14,7 +14,6 @@ use std::num::ParseIntError;
 /// # use dryip::strings::hex_to_rgb;
 /// assert_eq!(Ok(vec![255, 165, 1]), hex_to_rgb("FFA501"));
 /// ```
-/// [from_str_radix]: https://doc.rust-lang.org/std/primitive.i32.html#method.from_str_radix
 ///
 /// # Errors
 ///
@@ -33,7 +32,7 @@ pub fn hex_to_rgb(hex: &str) -> Result<Vec<i32>, ParseIntError> {
 
 /// Convert RGB into HEX value.
 ///
-/// Use [`UpperHex`] to format the string.
+/// Use [UpperHex](https://doc.rust-lang.org/std/fmt/trait.UpperHex.html) to format the string.
 ///
 /// # Examples
 ///
@@ -43,7 +42,6 @@ pub fn hex_to_rgb(hex: &str) -> Result<Vec<i32>, ParseIntError> {
 /// # use dryip::strings::rgb_to_hex;
 /// assert_eq!("FFA501", rgb_to_hex(255, 165, 1));
 /// ```
-/// [UpperHex]: https://doc.rust-lang.org/std/fmt/trait.UpperHex.html
 #[must_use]
 pub fn rgb_to_hex(r: i32, g: i32, b: i32) -> String {
     format!("{:02X}{:02X}{:02X}", r, g, b)
@@ -53,7 +51,8 @@ pub fn rgb_to_hex(r: i32, g: i32, b: i32) -> String {
 ///
 /// - Split the sentence by whitespace using `split()`.
 /// - Iterate through each word using `map()`.
-/// - Use [`RangeFull`] notation to get the first char uppercased and left the rest as is.
+/// - Use [RangeFull](https://doc.rust-lang.org/std/ops/struct.RangeFull.html) notation to get
+/// to get the first char uppercased and left the rest as is
 ///
 /// # Examples
 ///
@@ -77,7 +76,8 @@ pub fn capitalize_every_word(sentence: &str) -> String {
 ///
 /// - Replace any - or _ with a space, using the `replace()`.
 /// - Use `enumerate()` to check for the first word.
-/// - Use [`RangeFull`] notation to get the first char uppercased and left the rest as is.
+/// - Use [RangeFull](https://doc.rust-lang.org/std/ops/struct.RangeFull.html) notation
+/// to get the first char uppercased and left the rest as is.
 ///
 /// # Examples
 ///
@@ -87,7 +87,6 @@ pub fn capitalize_every_word(sentence: &str) -> String {
 /// # use dryip::strings::to_camelcase;
 /// assert_eq!("fooBar", to_camelcase("foo bar"));
 /// ```
-/// [RangeFull]: https://doc.rust-lang.org/std/ops/struct.RangeFull.html
 #[must_use]
 pub fn to_camelcase(sentence: &str) -> String {
     sentence

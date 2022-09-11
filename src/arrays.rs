@@ -46,7 +46,7 @@ pub fn all_unique(lst: Vec<u32>) -> bool {
 /// Both should have similar code.
 ///
 /// The other option is `partition`. However it can't work with multiple input such the current case.
-/// See `bifurcate_by` for `partition_example`
+/// See [`bifurcate_by`] for `partition` usage example.
 ///
 /// # Examples
 ///
