@@ -1,6 +1,6 @@
 #![allow(clippy::cast_sign_loss)]
 
-use std::collections::HashSet;
+use std::collections::{HashMap, HashSet};
 
 /// Check if all value in given list are equal.
 ///
@@ -153,6 +153,36 @@ pub fn compact(lst: Vec<Option<i32>>) -> Vec<Option<i32>> {
     lst.into_iter().filter(<Option<i32>>::is_some).collect()
 }
 
+/// Groups the elements of a list based on the given function.
+///
+/// Groups the elements of a list based on the given function and returns the count of elements in each group.
+///
+/// The function signature is similar to [`bifurcate_by`].
+/// It uses `HashMap`'s `entry()` to update the previous result.
+///
+/// # Examples
+///
+/// Basic usage:
+/// ```
+/// # use std::collections::HashMap;
+/// # use dryip::arrays::count_by;
+///fn len(item: &str) -> i32 {
+///    item.len() as i32
+///}
+///let expected = HashMap::from([(3, 2), (5, 1)]);
+///let input = vec!["one", "two", "three"];
+///assert_eq!(expected, count_by(input, &len));
+///```
+
+pub fn count_by(lst: Vec<&str>, f: &dyn Fn(&str) -> i32) -> HashMap<i32, i32> {
+    let mut result = HashMap::new();
+    for item in lst {
+        let prev = result.entry(f(item)).or_insert(0);
+        *prev += 1;
+    }
+    result
+}
+
 /// Returns a list of numbers in the arithmetic progression starting with the
 /// given positive integer and up to the specified limit.
 ///
@@ -228,6 +258,15 @@ mod tests {
         let input = vec![None, Some(1), None, None];
         let expected = vec![Some(1)];
         assert_eq!(expected, compact(input));
+    }
+    #[test]
+    fn test_count_by() {
+        fn len(item: &str) -> i32 {
+            item.len() as i32
+        }
+        let expected = HashMap::from([(3, 2), (5, 1)]);
+        let input = vec!["one", "two", "three"];
+        assert_eq!(expected, count_by(input, &len));
     }
     #[test]
     fn test_arithmetic_progression() {
