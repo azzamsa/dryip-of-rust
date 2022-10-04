@@ -173,7 +173,6 @@ pub fn compact(lst: Vec<Option<i32>>) -> Vec<Option<i32>> {
 ///let input = vec!["one", "two", "three"];
 ///assert_eq!(expected, count_by(input, &len));
 ///```
-
 pub fn count_by(lst: Vec<&str>, f: &dyn Fn(&str) -> i32) -> HashMap<i32, i32> {
     let mut result = HashMap::new();
     for item in lst {
@@ -181,6 +180,28 @@ pub fn count_by(lst: Vec<&str>, f: &dyn Fn(&str) -> i32) -> HashMap<i32, i32> {
         *prev += 1;
     }
     result
+}
+
+/// Counts occurrences
+///
+/// Counts the occurrences of a value in a vector.
+///
+/// Increment a counter for every item in the vector that has the given value and is of the same type.
+/// Using [`std::iter::Iterator::fold`] will make our code shorter.
+///
+/// # Examples
+///
+/// Basic usage:
+///
+/// ```rust
+/// # use dryip::arrays::count_occurrences;
+/// let input = vec![1, 1, 2, 1, 2, 3];
+/// assert_eq!(3, count_occurrences(&input, 1));
+/// ```
+#[must_use]
+pub fn count_occurrences(lst: &[i32], val: i32) -> i32 {
+    lst.iter()
+        .fold(0, |acc, &x| if x == val { acc + 1 } else { acc })
 }
 
 /// Returns a list of numbers in the arithmetic progression starting with the
@@ -267,6 +288,14 @@ mod tests {
         let expected = HashMap::from([(3, 2), (5, 1)]);
         let input = vec!["one", "two", "three"];
         assert_eq!(expected, count_by(input, &len));
+    }
+    #[test]
+    fn test_count_occurences() {
+        let input = vec![1, 1, 2, 1, 2, 3];
+        assert_eq!(3, count_occurrences(&input, 1));
+
+        let input = vec![0, 100, 2, 1, 2, 3];
+        assert_eq!(1, count_occurrences(&input, 0));
     }
     #[test]
     fn test_arithmetic_progression() {
