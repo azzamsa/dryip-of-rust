@@ -4,7 +4,7 @@ alias d := dev
 alias t := test
 
 # List available commands.
-default:
+_default:
     just --list --unsorted
 
 # Setup the repository.
@@ -31,11 +31,11 @@ fmt_check:
     cargo fmt --all -- --check
 
 # Lint the docstring.
-lint_doc:
+_lint_doc:
     cargo doc --all-features --no-deps
 
 # Lint the codebase.
-lint: lint_doc
+lint: _lint_doc
     cargo clippy
 
 # Test the codebase.
