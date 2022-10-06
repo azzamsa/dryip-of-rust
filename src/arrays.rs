@@ -204,6 +204,25 @@ pub fn count_occurrences(lst: &[i32], val: i32) -> i32 {
         .fold(0, |acc, &x| if x == val { acc + 1 } else { acc })
 }
 
+/// Deep flattens a list.
+///
+/// `slice` has a built in [`std::iter::Iterator::flatten`]
+///
+/// # Examples
+///
+/// Basic usage:
+///
+/// ```rust
+/// # use dryip::arrays::deep_flatten;
+/// let input = vec![vec![1], vec![2], vec![3, 4], vec![5]];
+/// let expected = vec![1, 2, 3, 4, 5];
+/// assert_eq!(expected, deep_flatten(input));
+/// ```
+#[must_use]
+pub fn deep_flatten(lst: Vec<Vec<i32>>) -> Vec<i32> {
+    lst.into_iter().flatten().collect()
+}
+
 /// Returns a list of numbers in the arithmetic progression starting with the
 /// given positive integer and up to the specified limit.
 ///
@@ -296,6 +315,16 @@ mod tests {
 
         let input = vec![0, 100, 2, 1, 2, 3];
         assert_eq!(1, count_occurrences(&input, 0));
+    }
+    #[test]
+    fn test_deep_flatten() {
+        let input = vec![vec![1], vec![2], vec![3, 4], vec![5]];
+        let expected = vec![1, 2, 3, 4, 5];
+        assert_eq!(expected, deep_flatten(input));
+
+        let input = vec![vec![1, 2, 3, 4], vec![5, 6]];
+        let expected = vec![1, 2, 3, 4, 5, 6];
+        assert_eq!(expected, deep_flatten(input));
     }
     #[test]
     fn test_arithmetic_progression() {
