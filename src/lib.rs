@@ -1,6 +1,6 @@
 #![warn(clippy::pedantic, clippy::nursery)]
 #![allow(clippy::doc_markdown)]
-#![deny(missing_docs)]
+#![deny(missing_docs, rustdoc::broken_intra_doc_links)]
 #![doc(
     html_logo_url = "https://raw.githubusercontent.com/azzamsa/dryip-of-rust/master/docs/logo.png
 "
