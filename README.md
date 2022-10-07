@@ -7,6 +7,9 @@ Short Rust 🦀 code snippets for inspiration 💦.
 <a href="https://github.com/azzamsa/dryip-of-rust/workflows/ci.yml">
     <img src="https://github.com/azzamsa/dryip-of-rust/workflows/ci/badge.svg" alt="Build status" />
 </a>
+<a href="https://docs.rs/dryip/latest/dryip/">
+    <img src="https://docs.rs/dryip/badge.svg" alt="Documentation" />
+</a>
 <a href="https://crates.io/crates/dryip">
   <img src="https://img.shields.io/crates/v/dryip.svg">
 </a>
