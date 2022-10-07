@@ -198,6 +198,19 @@ pub fn count_by(lst: Vec<&str>, f: &dyn Fn(&str) -> i32) -> HashMap<i32, i32> {
 /// let input = vec![1, 1, 2, 1, 2, 3];
 /// assert_eq!(3, count_occurrences(&input, 1));
 /// ```
+///
+/// # Alternatives:
+///
+/// Using [`std::iter::Iterator::count`]
+///
+/// ```rust
+/// fn count_occurrences(lst: &[i32], val: i32) -> i32 {
+///    lst.iter().filter(|&&x| x == val).count() as i32
+/// }
+///
+/// let input = vec![1, 1, 2, 1, 2, 3];
+/// assert_eq!(3, count_occurrences(&input, 1));
+/// ```
 #[must_use]
 pub fn count_occurrences(lst: &[i32], val: i32) -> i32 {
     lst.iter()
