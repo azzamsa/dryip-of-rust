@@ -223,6 +223,18 @@ pub fn deep_flatten(lst: Vec<Vec<i32>>) -> Vec<i32> {
     lst.into_iter().flatten().collect()
 }
 
+/// Difference
+///
+/// Returns the difference between two iterables.
+///
+/// - Convert b slice to [`use std::collections::HashSet`] to remove duplicates.
+/// - Iterate over a and keep the values not contained in b using [`std::iter::Iterator::filter`]
+#[must_use]
+pub fn difference(a: &[i32], b: &[i32]) -> Vec<i32> {
+    let b: HashSet<_> = b.iter().copied().collect();
+    a.iter().filter(|x| !b.contains(x)).copied().collect()
+}
+
 /// Returns a list of numbers in the arithmetic progression starting with the
 /// given positive integer and up to the specified limit.
 ///
@@ -325,6 +337,11 @@ mod tests {
         let input = vec![vec![1, 2, 3, 4], vec![5, 6]];
         let expected = vec![1, 2, 3, 4, 5, 6];
         assert_eq!(expected, deep_flatten(input));
+    }
+    #[test]
+    fn test_difference() {
+        let (a, b) = (&[1, 2, 3], &[1, 2, 4]);
+        assert_eq!(vec![3], difference(a, b));
     }
     #[test]
     fn test_arithmetic_progression() {
