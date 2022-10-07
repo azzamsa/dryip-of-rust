@@ -53,6 +53,10 @@ check: fmt_check lint test
 doc:
     cargo doc --open
 
+# Create a new release. Example `just release v2.2.0`
+release version:
+    bash scripts/release.sh {{ version }}
+
 # Check dependencies health.
 up:
     cargo +nightly udeps
