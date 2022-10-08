@@ -248,6 +248,29 @@ pub fn difference(a: &[i32], b: &[i32]) -> Vec<i32> {
     a.iter().filter(|x| !b.contains(x)).copied().collect()
 }
 
+/// Every
+///
+/// Returns True if the provided function returns True for every element in the vector, False otherwise.
+///
+/// Use [`std::iter::Iterator::any`] to tests if any element of the iterator matches a predicate.
+///
+/// # Examples
+///
+/// Basic usage:
+///
+/// ```rust
+/// # use dryip::arrays::every;
+/// fn bigger(item: i32) -> bool {
+///     item > 1
+/// }
+///
+/// let input = &[4, 2, 3];
+/// assert_eq!(true, every(input, &bigger));
+/// ````
+pub fn every(lst: &[i32], f: &dyn Fn(i32) -> bool) -> bool {
+    lst.iter().any(|&x| f(x))
+}
+
 /// Returns a list of numbers in the arithmetic progression starting with the
 /// given positive integer and up to the specified limit.
 ///
@@ -355,6 +378,14 @@ mod tests {
     fn test_difference() {
         let (a, b) = (&[1, 2, 3], &[1, 2, 4]);
         assert_eq!(vec![3], difference(a, b));
+    }
+    #[test]
+    fn test_every() {
+        fn bigger(item: i32) -> bool {
+            item > 1
+        }
+        let input = &[4, 2, 3];
+        assert_eq!(true, every(input, &bigger));
     }
     #[test]
     fn test_arithmetic_progression() {
