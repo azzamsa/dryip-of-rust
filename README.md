@@ -30,7 +30,7 @@ Short Rust 🦀 code snippets for inspiration 💦.
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-- I ❤️ pull requests and bug reports!
+- I ❤️ pull requests and bug reports!. Check out the [guide][contrib-guide].
 - Don't hesitate to [tell me my Rust-fu sucks][new-issue], but please tell me why.
 
 ## Credits
@@ -40,6 +40,7 @@ Short Rust 🦀 code snippets for inspiration 💦.
 
 <!-- dprint-ignore-start -->
 
+[contrib-guide]: docs/dev/README.md#adding-new-snippet
 [new-issue]: https://github.com/azzamsa/dryip-of-rust/issues/new
 
 [30-seconds]: https://github.com/30-seconds/30-seconds-of-code

@@ -2,20 +2,18 @@
 
 ## Adding New Snippet
 
-Use the [previous][30-seconds-previous] version of the repository.
-It is more readable and easier to find things.
+Visit the previous version of [30-seconds][30-seconds-previous] repository.
+It is more readable and easier to find things. Then find missing function to implement.
 
 Many of the snippets are one-liners.
 Use [Iterator in std::iter][iter] documentation to find suitable function.
 
-# Release Checklist
+## Release Checklist
 
-- Run the lint check: `make is_verified`.
-- Run the release task: `make release version=v<mayor.minor.path>`. Such `make release version=v0.1.7`.
+- Run `just check`.
+- Run the release task: `just release v<major.minor.path>`. Such `just release v0.1.7`.
 - Check if [Continuous Integration][ci] workflow is completed successfully.
 - Push the tags: `git push --tags`
-- Wait for [Continuous Deployment][cd] workflow to finish.
-- Create a new GitHub release with the created tag above, and copy the release news from the CHANGELOG.md.
 
 <!-- dprint-ignore-start -->
 
