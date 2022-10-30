@@ -271,6 +271,28 @@ pub fn every(lst: &[i32], f: &dyn Fn(i32) -> bool) -> bool {
     lst.iter().any(|&x| f(x))
 }
 
+/// Every Nth
+///
+/// Returns every nth element in a list.
+///
+/// The python version use `lst[nth-1::nth]` wich will start from the index `nth-1`.
+/// You can use [`std::iter::Iterator::skip`] to replicate this behavior.
+///
+/// # Examples
+///
+/// Basic usage:
+///
+/// ```rust
+/// # use dryip::arrays::every_nth;
+/// let input = vec![1, 2, 3, 4, 5, 6];
+/// let expected = vec![2, 4, 6];
+/// assert_eq!(expected, every_nth(input, 2));
+/// ````
+#[must_use]
+pub fn every_nth(lst: Vec<i32>, nth: usize) -> Vec<i32> {
+    lst.into_iter().skip(nth - 1).step_by(nth).collect()
+}
+
 /// Returns a list of numbers in the arithmetic progression starting with the
 /// given positive integer and up to the specified limit.
 ///
@@ -386,6 +408,12 @@ mod tests {
         }
         let input = &[4, 2, 3];
         assert_eq!(true, every(input, &bigger));
+    }
+    #[test]
+    fn test_every_nth() {
+        let input = vec![1, 2, 3, 4, 5, 6];
+        let expected = vec![2, 4, 6];
+        assert_eq!(expected, every_nth(input, 2));
     }
     #[test]
     fn test_arithmetic_progression() {
