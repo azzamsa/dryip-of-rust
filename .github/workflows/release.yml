@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Extract crate information
         shell: bash
@@ -28,7 +28,7 @@ jobs:
           components: clippy, rustfmt
 
       - name: Cache
-        uses: Swatinem/rust-cache@v1
+        uses: Swatinem/rust-cache@v2
 
       - name: Publish to crates.io
         uses: katyo/publish-crates@v1

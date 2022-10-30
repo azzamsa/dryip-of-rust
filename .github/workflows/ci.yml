@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install rust toolchain
         uses: actions-rs/toolchain@v1
@@ -32,7 +32,7 @@ jobs:
           dprint --version
 
       - name: Cache
-        uses: Swatinem/rust-cache@v1
+        uses: Swatinem/rust-cache@v2
 
       - name: Ensure `fmt` has been run
         run:  just fmt-check
@@ -48,7 +48,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install rust toolchain (v${{ env.MIN_SUPPORTED_RUST_VERSION }})
         uses: actions-rs/toolchain@v1
@@ -64,7 +64,7 @@ jobs:
         uses: extractions/setup-just@v1
 
       - name: Cache
-        uses: Swatinem/rust-cache@v1
+        uses: Swatinem/rust-cache@v2
 
       - name: Run tests
         run: just test
@@ -83,7 +83,7 @@ jobs:
 
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install Rust toolchain
         uses: actions-rs/toolchain@v1
@@ -94,7 +94,7 @@ jobs:
           profile: minimal
 
       - name: Cache
-        uses: Swatinem/rust-cache@v1
+        uses: Swatinem/rust-cache@v2
 
       - name: Show version information
         shell: bash
