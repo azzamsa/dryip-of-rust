@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.0] - 2022-10-30
+
+### Features
+
+- Returns every nth element in a list ([7dfc99a](7dfc99ad0a01c545096e3545d60f2565d7592633))
+- Check `every` item in the vector ([7c36d35](7c36d35d67549f40017448feb40f598729a86a62))
+
 ## [0.5.0] - 2022-10-07
 
 ### Features
