@@ -5,8 +5,9 @@
 Visit the previous version of [30-seconds][30-seconds-previous] repository.
 It is more readable and easier to find things. Then find missing function to implement.
 
-Many of the snippets are one-liners.
-Use [Iterator in std::iter][iter] documentation to find suitable function.
+Frequently used documentations:
+
+- [Iterator in std::iter][iter]
 
 ## Release Checklist
 
