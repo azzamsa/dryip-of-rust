@@ -17,7 +17,7 @@ if [ -n "$1" ]; then
     # update the changelog
     git-cliff --tag "$1" --sort newest --config configs/cliff.toml > CHANGELOG.md
     # format newly added changelog file
-    make fmt
+    just fmt
 
     git add --all && git commit --message="$1"
     git show

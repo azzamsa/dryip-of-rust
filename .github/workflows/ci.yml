@@ -35,7 +35,7 @@ jobs:
         uses: Swatinem/rust-cache@v1
 
       - name: Ensure `fmt` has been run
-        run:  just fmt_check
+        run:  just fmt-check
 
       - name: Ensure MSRV is set in `clippy.toml`
         run: grep "^msrv = \"${{ env.MIN_SUPPORTED_RUST_VERSION }}\"\$" clippy.toml

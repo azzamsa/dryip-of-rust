@@ -1,5 +1,7 @@
 #!/usr/bin/env -S just --justfile
 
+shebang := if os() == 'windows' { 'powershell.exe' } else { '/usr/bin/sh' }
+
 alias d := dev
 alias t := test
 
@@ -25,10 +27,12 @@ dev pattern:
 # Format the codebase.
 fmt:
     cargo fmt --all
+    dprint fmt --config configs/dprint.json
 
 # Check is the codebase properly formatted.
-fmt_check:
+fmt-check:
     cargo fmt --all -- --check
+    dprint check --config configs/dprint.json
 
 # Lint the docstring.
 _lint_doc:
@@ -47,7 +51,7 @@ test:
 comply: fmt lint test
 
 # Check if the repository comply with the rules and ready to be pushed.
-check: fmt_check lint test
+check: fmt-check lint test
 
 # Open documentation.
 doc:
@@ -57,12 +61,13 @@ doc:
 release version:
     bash scripts/release.sh {{ version }}
 
-# Check dependencies health.
-up:
-    cargo +nightly udeps
-    cargo outdated --root-deps-only
-
-# Local Variables:
-# mode: makefile
-# End:
-# vim: set ft=make :
+# Check dependencies health. Pass `--write` to uppgrade dependencies.
+up arg="":
+    #!{{ shebang }}
+    if [ "{{ arg }}" = "--write" ]; then
+    	cargo upgrade
+    	cargo update
+    else
+    	cargo +nightly udeps
+        cargo outdated --root-deps-only
+    fi;
