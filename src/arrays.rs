@@ -1,5 +1,6 @@
 #![allow(clippy::cast_sign_loss)]
 
+use itertools::Itertools;
 use std::collections::{HashMap, HashSet};
 
 /// Check if all value in given list are equal.
@@ -293,6 +294,17 @@ pub fn every_nth(lst: Vec<i32>, nth: usize) -> Vec<i32> {
     lst.into_iter().skip(nth - 1).step_by(nth).collect()
 }
 
+/// Filter Non Unique
+///
+/// Filters out the non-unique values in a list.
+///
+///
+#[must_use]
+pub fn filter_non_unique(lst: &[i32]) -> Vec<i32> {
+    let counts = lst.iter().counts();
+    lst.iter().filter(|x| counts[x] == 1).copied().collect()
+}
+
 /// Returns a list of numbers in the arithmetic progression starting with the
 /// given positive integer and up to the specified limit.
 ///
@@ -414,6 +426,12 @@ mod tests {
         let input = vec![1, 2, 3, 4, 5, 6];
         let expected = vec![2, 4, 6];
         assert_eq!(expected, every_nth(input, 2));
+    }
+    #[test]
+    fn test_filter_non_unique() {
+        let input = &[1, 2, 2, 3, 4, 4, 5];
+        let expected = vec![1, 3, 5];
+        assert_eq!(expected, filter_non_unique(input));
     }
     #[test]
     fn test_arithmetic_progression() {
