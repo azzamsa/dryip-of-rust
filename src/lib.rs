@@ -30,27 +30,3 @@ pub mod maths;
 
 /// String snippets.
 pub mod strings;
-
-/// Sort the slice (non mutating).
-///
-/// Rust currently doesn't have a non-mutating sort function
-/// <https://github.com/rust-lang/rfcs/issues/2731>.
-/// There is a handy third-party tool [itertools](https://docs.rs/itertools/0.10.1/itertools/fn.sorted.html)
-/// But we minimize the use of any external dependencies, as the project's goal is learning.
-#[must_use]
-pub fn sorted(word: &str) -> String {
-    let mut chars_ = word.chars().collect::<Vec<char>>();
-    chars_.sort_unstable();
-    chars_.iter().collect::<String>()
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_sorted() {
-        assert_eq!("aaagmnr", sorted("anagram"));
-        assert_eq!("aceimn", sorted("iceman"));
-    }
-}

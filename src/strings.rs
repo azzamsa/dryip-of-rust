@@ -127,8 +127,8 @@ pub fn is_anagram(sentence1: &str, sentence2: &str) -> bool {
     if sentence1.len() != sentence2.len() {
         return false;
     }
-
-    crate::sorted(&sentence1) == crate::sorted(&sentence2)
+    itertools::sorted(sentence1.chars()).as_slice()
+        == itertools::sorted(sentence2.chars()).as_slice()
 }
 
 #[cfg(test)]
