@@ -39,7 +39,7 @@ _lint_doc:
     cargo doc --all-features --no-deps
 
 # Lint the codebase.
-lint: _lint_doc
+lint:
     cargo clippy
 
 # Test the codebase.
@@ -48,7 +48,7 @@ test:
     cargo nextest run
 
 # Tasks to make the code-base comply with the rules. Mostly used in git hooks.
-comply: fmt lint test
+comply: fmt lint _lint_doc test
 
 # Check if the repository comply with the rules and ready to be pushed.
 check: fmt-check lint test
