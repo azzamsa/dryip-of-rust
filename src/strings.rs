@@ -90,8 +90,7 @@ pub fn capitalize_every_word(sentence: &str) -> String {
 #[must_use]
 pub fn to_camelcase(sentence: &str) -> String {
     sentence
-        .replace('-', " ")
-        .replace('_', " ")
+        .replace(['-', '_'], " ")
         .split(' ')
         .enumerate()
         .map(|(index, word)| {
