@@ -8,7 +8,7 @@ on: [push, pull_request]
 jobs:
   code_quality:
     name: Code Quality
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
@@ -42,7 +42,7 @@ jobs:
 
   msrv:
     name: Minimum Supported Rust Version
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
