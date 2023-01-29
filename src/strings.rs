@@ -44,7 +44,7 @@ pub fn hex_to_rgb(hex: &str) -> Result<Vec<i32>, ParseIntError> {
 /// ```
 #[must_use]
 pub fn rgb_to_hex(r: i32, g: i32, b: i32) -> String {
-    format!("{:02X}{:02X}{:02X}", r, g, b)
+    format!("{r:02X}{g:02X}{b:02X}")
 }
 
 /// Capitalize every word.
