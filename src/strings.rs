@@ -52,7 +52,7 @@ pub fn rgb_to_hex(r: i32, g: i32, b: i32) -> String {
 /// - Split the sentence by whitespace using `split()`.
 /// - Iterate through each word using `map()`.
 /// - Use [RangeFull](https://doc.rust-lang.org/std/ops/struct.RangeFull.html) notation to get
-/// to get the first char uppercased and left the rest as is
+///   to get the first char uppercased and left the rest as is
 ///
 /// # Examples
 ///
@@ -77,7 +77,7 @@ pub fn capitalize_every_word(sentence: &str) -> String {
 /// - Replace any - or _ with a space, using the `replace()`.
 /// - Use `enumerate()` to check for the first word.
 /// - Use [RangeFull](https://doc.rust-lang.org/std/ops/struct.RangeFull.html) notation
-/// to get the first char uppercased and left the rest as is.
+///   to get the first char uppercased and left the rest as is.
 ///
 /// # Examples
 ///

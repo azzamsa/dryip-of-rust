@@ -110,7 +110,7 @@ pub fn bifurcate<'a>(lst: &'a [&str], filter: &'a [bool]) -> Vec<Vec<&'a str>> {
 pub fn bifurcate_by<'a>(lst: &[&'a str], f: &'a dyn Fn(&str) -> bool) -> Vec<Vec<&'a str>> {
     let (result, result1): (Vec<&str>, Vec<&str>) = lst.iter().partition(|item| f(item));
 
-    [result, result1].to_vec()
+    vec![result, result1]
 }
 
 /// Chunks a list into smaller lists of a specified size.
@@ -131,12 +131,12 @@ pub fn bifurcate_by<'a>(lst: &[&'a str], f: &'a dyn Fn(&str) -> bool) -> Vec<Vec
 /// ```
 #[must_use]
 pub fn chunk(lst: &[i32], size: usize) -> Vec<Vec<i32>> {
-    lst.chunks(size).into_iter().map(<[i32]>::to_vec).collect()
+    lst.chunks(size).map(<[i32]>::to_vec).collect()
 }
 
 /// Removes falsey values from a list.
 ///
-/// We have `Option` type in Rust. This is the recomended type to use
+/// We have `Option` type in Rust. This is the recommended type to use
 /// in this case.
 ///
 /// # Examples
@@ -145,13 +145,13 @@ pub fn chunk(lst: &[i32], size: usize) -> Vec<Vec<i32>> {
 ///
 /// ```rust
 /// # use dryip::arrays::compact;
-///let input = vec![None, Some(1), None, None];
-///let expected = vec![Some(1)];
+///let input = vec![None, Some(1), None, Some(2)];
+///let expected = vec![1, 2];
 ///assert_eq!(expected, compact(input));
 /// ```
 #[must_use]
-pub fn compact(lst: Vec<Option<i32>>) -> Vec<Option<i32>> {
-    lst.into_iter().filter(<Option<i32>>::is_some).collect()
+pub fn compact(lst: Vec<Option<i32>>) -> Vec<i32> {
+    lst.into_iter().flatten().collect()
 }
 
 /// Groups the elements of a list based on the given function.
@@ -167,14 +167,14 @@ pub fn compact(lst: Vec<Option<i32>>) -> Vec<Option<i32>> {
 /// ```
 /// # use std::collections::HashMap;
 /// # use dryip::arrays::count_by;
-///fn len(item: &str) -> i32 {
-///    item.len() as i32
+///fn len(item: &str) -> usize {
+///    item.len()
 ///}
 ///let expected = HashMap::from([(3, 2), (5, 1)]);
 ///let input = vec!["one", "two", "three"];
 ///assert_eq!(expected, count_by(input, &len));
 ///```
-pub fn count_by(lst: Vec<&str>, f: &dyn Fn(&str) -> i32) -> HashMap<i32, i32> {
+pub fn count_by(lst: Vec<&str>, f: &dyn Fn(&str) -> usize) -> HashMap<usize, usize> {
     let mut result = HashMap::new();
     for item in lst {
         let prev = result.entry(f(item)).or_insert(0);
@@ -276,7 +276,7 @@ pub fn every(lst: &[i32], f: &dyn Fn(i32) -> bool) -> bool {
 ///
 /// Returns every nth element in a list.
 ///
-/// The python version use `lst[nth-1::nth]` wich will start from the index `nth-1`.
+/// The python version use `lst[nth-1::nth]` which will start from the index `nth-1`.
 /// You can use [`std::iter::Iterator::skip`] to replicate this behavior.
 ///
 /// # Examples
@@ -377,21 +377,21 @@ mod tests {
     }
     #[test]
     fn test_compact() {
-        let input = vec![None, Some(1), None, None];
-        let expected = vec![Some(1)];
+        let input = vec![None, Some(1), None, Some(2)];
+        let expected = vec![1, 2];
         assert_eq!(expected, compact(input));
     }
     #[test]
     fn test_count_by() {
-        fn len(item: &str) -> i32 {
-            item.len() as i32
+        const fn len(item: &str) -> usize {
+            item.len()
         }
         let expected = HashMap::from([(3, 2), (5, 1)]);
         let input = vec!["one", "two", "three"];
         assert_eq!(expected, count_by(input, &len));
     }
     #[test]
-    fn test_count_occurences() {
+    fn test_count_occurrences() {
         let input = vec![1, 1, 2, 1, 2, 3];
         assert_eq!(3, count_occurrences(&input, 1));
 
@@ -415,11 +415,11 @@ mod tests {
     }
     #[test]
     fn test_every() {
-        fn bigger(item: i32) -> bool {
+        const fn bigger(item: i32) -> bool {
             item > 1
         }
         let input = &[4, 2, 3];
-        assert_eq!(true, every(input, &bigger));
+        assert!(every(input, &bigger));
     }
     #[test]
     fn test_every_nth() {
