@@ -10,15 +10,9 @@ keywords = ["algorithms", "dryip"]
 license = "MIT OR Apache-2.0"
 readme = "README.md"
 repository = "https://github.com/azzamsa/dryip-of-rust"
+rust-version = "1.81.0"
 description = "Short 🩸 Rust 🦀 code snippets for inspiration."
 
 [dependencies]
 itertools = "0.10.5"
 time = "0.3.16"
-
-[dev-dependencies]
-# git hooks
-cargo-husky = { version = "1", features = ["user-hooks"] }
-
-[package.metadata.cargo-udeps.ignore]
-development = ["cargo-husky"]
