@@ -1,72 +1,77 @@
 #!/usr/bin/env -S just --justfile
 
-shebang := if os() == 'windows' { 'powershell.exe' } else { '/usr/bin/sh' }
-
 alias d := dev
+alias f := fmt
+alias l := lint
 alias t := test
+alias c := comply
+alias k := check
 
-# List available commands.
+[doc('List available commands')]
 _default:
     just --list --unsorted
 
-# Setup the repository.
+[confirm('⚠️ This command will alter your system. Run recipe `setup`?')]
+[doc('Setup the repository')]
 setup:
-    git cliff --version || cargo install --locked git-cliff
-    cargo nextest --version || cargo install --locked cargo-nextest
-    cargo-set-version --help || cargo install --locked cargo-edit
-    cargo watch --version || cargo install --locked cargo-watch
-    cargo outdated --version || cargo install --locked cargo-outdated
-    cargo tarpaulin --version || cargo install --locked cargo-tarpaulin
-    cargo udeps --version || cargo install --locked cargo-udeps
-    dprint --version || cargo install --locked dprint
+    just _cargo-install 'cargo-edit cargo-nextest cargo-outdated dprint git-cliff bacon typos-cli'
 
-# Develop the app.
-dev pattern:
-    cargo watch -x 'test -- --nocapture --test {{ pattern }}'
+[doc('Tasks to make the code-base comply with the rules. Mostly used in git hooks')]
+comply: _doc-check fmt lint test
 
-# Format the codebase.
+[doc('Check if the repository comply with the rules and ready to be pushed')]
+check: _doc-check fmt-check lint test
+
+[doc('Develop the app')]
+dev:
+    bacon
+
+[doc('Format the codebase.')]
 fmt:
     cargo fmt --all
-    dprint fmt --config configs/dprint.json
+    dprint fmt
 
-# Check is the codebase properly formatted.
+[doc('Check is the codebase properly formatted')]
 fmt-check:
     cargo fmt --all -- --check
-    dprint check --config configs/dprint.json
+    dprint check
 
-# Lint the docstring.
-_lint_doc:
-    cargo doc --all-features --no-deps
-
-# Lint the codebase.
+[doc('Lint the codebase')]
 lint:
-    cargo clippy
+    cargo clippy --all-targets --all-features
+    typos
 
-# Test the codebase.
+[doc('Test the codebase')]
 test:
     cargo test --doc
     cargo nextest run
 
-# Tasks to make the code-base comply with the rules. Mostly used in git hooks.
-comply: fmt lint _lint_doc test
+[doc('Create a new release. Example `cargo-release release minor --tag-name v0.2.0`')]
+release level:
+    cargo-release release {{ level }} --execute
 
-# Check if the repository comply with the rules and ready to be pushed.
-check: fmt-check lint test
+[doc('Make sure the repo is ready for release')]
+release-check level: check
+    just up
+    cargo-release release {{ level }}
 
-# Open documentation.
-doc:
-    cargo doc --open
+[doc('Check the documentation')]
+_doc-check:
+    cargo doc --all-features --no-deps
+    cargo test --doc
 
-# Create a new release. Example `just release v2.2.0`
-release version:
-    bash scripts/release.sh {{ version }}
+[doc('Prepare release hooks')]
+_release-prepare version:
+    git-cliff --config .cliff.toml --output CHANGELOG.md --tag {{ version }}
+    just fmt
 
-# Check dependencies health. Pass `--write` to uppgrade dependencies.
+[doc('Check dependencies health. Pass `--write` to upgrade dependencies')]
+[unix]
 up arg="":
-    #!{{ shebang }}
+    #!/usr/bin/env bash
     if [ "{{ arg }}" = "--write" ]; then
-    	cargo upgrade
-    	cargo update
+        cargo upgrade
+        cargo update
     else
         cargo outdated --root-deps-only
     fi;
