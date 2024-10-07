@@ -72,6 +72,14 @@ pub fn capitalize_every_word(sentence: &str) -> String {
         .join(" ")
 }
 
+/// Returns the length of a string in bytes.
+///
+/// - Use [`str::len`] to get its size  in bytes
+#[must_use]
+pub const fn byte_size(s: &str) -> usize {
+    s.len()
+}
+
 /// Converts a string to camelcase.
 ///
 /// - Replace any - or _ with a space, using the `replace()`.
@@ -152,6 +160,11 @@ mod tests {
             capitalize_every_word("The quick brown fox jumps")
         );
         assert_eq!("Foo", capitalize_every_word("foo"));
+    }
+    #[test]
+    fn test_byte_size() {
+        assert_eq!(byte_size("😀"), 4);
+        assert_eq!(byte_size("Hello World"), 11);
     }
     #[test]
     fn test_to_camelcase() {
