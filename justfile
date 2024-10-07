@@ -72,6 +72,7 @@ up arg="":
     if [ "{{ arg }}" = "--write" ]; then
         cargo upgrade
         cargo update
+        dprint config update
     else
         cargo outdated --root-deps-only
     fi;

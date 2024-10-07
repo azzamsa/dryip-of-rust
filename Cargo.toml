@@ -14,7 +14,7 @@ rust-version = "1.81.0"
 description = "Short 🩸 Rust 🦀 code snippets for inspiration."
 
 [dependencies]
-itertools = "0.10.5"
+itertools = "0.13.0"
 
 [package.metadata.release]
 sign-commit = true
