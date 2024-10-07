@@ -15,3 +15,10 @@ description = "Short 🩸 Rust 🦀 code snippets for inspiration."
 
 [dependencies]
 itertools = "0.10.5"
+
+[package.metadata.release]
+sign-commit = true
+sign-tag = true
+tag-message = "v{{version}}"
+pre-release-commit-message = "v{{version}}"
+pre-release-hook = ["just", "_release-prepare", "{{version}}"]
