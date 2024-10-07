@@ -22,9 +22,6 @@
 /// Array snippets.
 pub mod arrays;
 
-/// Date snippets.
-pub mod dates;
-
 /// Math snippets.
 pub mod maths;
 
